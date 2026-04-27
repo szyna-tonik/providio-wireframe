@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Providio Landing Wireframe V4</title>
+    <style>
+      :root {
+        --ink: #101010;
+        --text: #242424;
+        --muted: #676767;
+        --faint: #a6a6a6;
+        --line: #d8d8d4;
+        --line-dark: #4a4a4a;
+        --paper: #f5f5f1;
+        --surface: #ffffff;
+        --wash: #ecece8;
+        --dark: #181818;
+        --dark-2: #252525;
+        --max: 1500px;
+        --gutter: clamp(22px, 3vw, 56px);
+        --section: clamp(96px, 10vw, 180px);
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Aptos, "Geist", "Soehne", "SF Pro Display", system-ui, sans-serif;
+        line-height: 1.35;
+        text-rendering: geometricPrecision;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      .page { overflow: clip; }
+
+      .nav {
+        position: fixed;
+        top: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        width: min(calc(100% - 32px), 920px);
+        border: 1px solid rgba(16, 16, 16, 0.12);
+        background: rgba(245, 245, 241, 0.9);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav-inner {
+        min-height: 54px;
+        padding: 0 9px 0 16px;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 650;
+        letter-spacing: -0.03em;
+      }
+
+      .brand-mark {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--ink);
+        font-size: 12px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+
+      .nav-action { justify-self: end; }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 38px;
+        padding: 0 9px 0 15px;
+        background: var(--ink);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 650;
+        letter-spacing: -0.01em;
+        transition: transform 500ms var(--ease), background 500ms var(--ease);
+      }
+
+      .btn:hover { background: #2b2b2b; }
+      .btn:active { transform: scale(0.98); }
+
+      .btn .arrow {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.15);
+        transition: transform 500ms var(--ease);
+      }
+
+      .btn:hover .arrow { transform: translateX(2px); }
+
+      .btn.secondary {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+      }
+
+      .btn.secondary .arrow { background: var(--wash); }
+
+      .section {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: var(--section) var(--gutter);
+      }
+
+      .section.first { padding-top: clamp(150px, 15vw, 250px); }
+
+      .kicker,
+      .caption,
+      .flow-title,
+      .flow-item small,
+      .outcome-arrow,
+      .outcome-branch small,
+      .loop-step span,
+      .log-row time,
+      .log-row em {
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .kicker {
+        margin: 0 0 22px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .mega {
+        margin: 0;
+        max-width: 760px;
+        font-size: clamp(42px, 6vw, 78px);
+        line-height: 1.02;
+        letter-spacing: -0.055em;
+        font-weight: 500;
+      }
+
+      h2 {
+        margin: 0;
+        max-width: 680px;
+        font-size: clamp(31px, 4vw, 52px);
+        line-height: 1.06;
+        letter-spacing: -0.045em;
+        font-weight: 500;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.15;
+        letter-spacing: -0.025em;
+        font-weight: 500;
+      }
+
+      p { margin-top: 0; }
+
+      .lead {
+        margin: 0;
+        max-width: 690px;
+        color: var(--text);
+        font-size: clamp(18px, 2vw, 23px);
+        line-height: 1.35;
+        letter-spacing: -0.025em;
+        font-weight: 400;
+      }
+
+      .copy {
+        margin: 0;
+        max-width: 520px;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.62;
+      }
+
+      .caption {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .hero-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr);
+        gap: clamp(44px, 6vw, 104px);
+        align-items: end;
+      }
+
+      .hero-copy { display: grid; gap: 34px; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+      .hero-panel {
+        min-height: 620px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--ink);
+        background: var(--dark);
+        color: #f2f2f0;
+      }
+
+      .panel-label {
+        position: absolute;
+        top: 22px;
+        left: 22px;
+        right: 22px;
+        display: flex;
+        justify-content: space-between;
+        color: #b7b7b7;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .decision-surface {
+        position: absolute;
+        inset: 86px 44px 82px;
+        border: 1px solid var(--line-dark);
+      }
+
+      .decision-surface::before,
+      .decision-surface::after {
+        content: "";
+        position: absolute;
+        border: 1px solid #393939;
+      }
+
+      .decision-surface::before { inset: 44px; }
+      .decision-surface::after { inset: 92px; }
+
+      .surface-title {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        text-align: center;
+      }
+
+      .surface-title strong {
+        display: block;
+        max-width: 310px;
+        font-size: clamp(31px, 4vw, 52px);
+        line-height: 1.06;
+        letter-spacing: -0.045em;
+        font-weight: 500;
+      }
+
+      .surface-title span {
+        display: block;
+        margin-top: 16px;
+        color: #a0a0a0;
+        font-size: 13px;
+      }
+
+      .micro-node {
+        position: absolute;
+        min-width: 126px;
+        border: 1px solid var(--line-dark);
+        background: #242424;
+        padding: 11px 12px;
+        color: #dfdfdf;
+        font-size: 12px;
+      }
+
+      .micro-node small {
+        display: block;
+        margin-bottom: 5px;
+        color: #8f8f8f;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .mn1 { top: 122px; left: 24px; }
+      .mn2 { top: 150px; right: 28px; }
+      .mn3 { bottom: 128px; left: 34px; }
+      .mn4 { bottom: 112px; right: 38px; }
+      .mn5 { left: 50%; bottom: 34px; transform: translateX(-50%); }
+
+      .proof-section {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 0 var(--gutter) clamp(76px, 8vw, 132px);
+      }
+
+      .proof-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid var(--line);
+        background: var(--surface);
+      }
+
+      .proof {
+        padding: 22px;
+        border-right: 1px solid var(--line);
+      }
+
+      .proof:last-child { border-right: 0; }
+
+      .proof strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 28px;
+        line-height: 0.92;
+        letter-spacing: -0.06em;
+        font-weight: 500;
+      }
+
+      .proof span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .contrast-section {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: var(--surface);
+      }
+
+      .contrast-grid {
+        display: grid;
+        grid-template-columns: 0.78fr 1.22fr;
+        gap: clamp(44px, 8vw, 130px);
+        align-items: center;
+      }
+
+      .contrast-panels {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .contrast-card {
+        min-height: 430px;
+        padding: clamp(24px, 3vw, 42px);
+        background: var(--paper);
+        display: grid;
+        align-content: space-between;
+      }
+
+      .contrast-card.dark {
+        background: var(--dark);
+        color: #f2f2f0;
+      }
+
+      .contrast-card .copy { color: inherit; opacity: 0.68; }
+
+      .visual-lines { display: grid; gap: 10px; }
+
+      .visual-lines span {
+        display: block;
+        height: 36px;
+        border: 1px solid currentColor;
+        opacity: 0.24;
+      }
+
+      .story-band { background: var(--paper); }
+
+      .story-inner {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: clamp(90px, 10vw, 160px) var(--gutter);
+      }
+
+      .story-intro {
+        min-height: 52vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding-bottom: clamp(68px, 8vw, 130px);
+      }
+
+      .story-intro .copy {
+        margin: 24px auto 0;
+        max-width: 620px;
+      }
+
+      .story-stack {
+        display: grid;
+        gap: clamp(36px, 5vw, 76px);
+      }
+
+      .story-card {
+        position: sticky;
+        top: 104px;
+        min-height: 72vh;
+        display: grid;
+        grid-template-columns: 0.86fr 1.14fr;
+        gap: clamp(30px, 5vw, 78px);
+        align-items: center;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        padding: clamp(28px, 5vw, 70px);
+      }
+
+      .story-card:nth-child(2) { background: #efefeb; top: 124px; }
+      .story-card:nth-child(3) { background: var(--dark); color: #f4f4f2; border-color: #353535; top: 144px; }
+      .story-card:nth-child(3) .copy,
+      .story-card:nth-child(3) .caption { color: #bdbdbd; }
+
+      .card-copy { display: grid; gap: 22px; }
+
+      .image-block {
+        min-height: clamp(420px, 36vw, 620px);
+        border: 1px solid var(--line);
+        background: var(--wash);
+        color: var(--ink);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .image-block.dark {
+        border-color: #343434;
+        background: var(--dark);
+        color: #f4f4f2;
+      }
+
+      .image-title {
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        bottom: 24px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        color: inherit;
+      }
+
+      .image-title strong {
+        max-width: 270px;
+        font-size: 28px;
+        line-height: 0.92;
+        letter-spacing: -0.055em;
+        font-weight: 500;
+      }
+
+      .image-title span {
+        max-width: 220px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .dark .image-title span { color: #ababab; }
+
+      .big-quote {
+        margin: 0;
+        padding: 30px 0 0;
+        border-top: 1px solid var(--line);
+        color: var(--text);
+        font-size: clamp(31px, 4vw, 52px);
+        line-height: 1.06;
+        letter-spacing: -0.045em;
+        font-weight: 500;
+      }
+
+      .system-section { background: var(--dark); color: #f4f4f2; }
+      .system-section .kicker,
+      .system-section .copy { color: #bdbdbd; }
+      .system-section .section { max-width: 1680px; }
+
+      .wide-intro {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: clamp(44px, 8vw, 140px);
+        align-items: end;
+        margin-bottom: clamp(70px, 8vw, 130px);
+      }
+
+      .stack-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr 1fr;
+        gap: 1px;
+        background: #3c3c3c;
+        border: 1px solid #3c3c3c;
+      }
+
+      .stack-card {
+        min-height: 390px;
+        padding: 28px;
+        background: #202020;
+        display: grid;
+        align-content: space-between;
+      }
+
+      .stack-card.featured { min-height: 560px; background: #efefeb; color: var(--ink); }
+
+      .stack-card strong {
+        display: block;
+        font-size: clamp(31px, 4vw, 52px);
+        line-height: 1.06;
+        letter-spacing: -0.045em;
+        font-weight: 500;
+      }
+
+      .stack-card p { margin: 18px 0 0; max-width: 320px; color: #bdbdbd; }
+      .stack-card.featured p { color: var(--muted); }
+
+      .mini-diagram { display: grid; gap: 10px; }
+      .bar { height: 34px; border: 1px solid currentColor; opacity: 0.42; }
+
+      .agent-section { max-width: 1680px; }
+
+      .agent-stage {
+        display: grid;
+        gap: clamp(54px, 8vw, 130px);
+      }
+
+      .agent-copy {
+        max-width: var(--max);
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: clamp(44px, 8vw, 130px);
+        align-items: end;
+      }
+
+      .agent-board {
+        padding: clamp(22px, 3vw, 40px);
+        border: 1px solid var(--ink);
+        background: var(--surface);
+        display: grid;
+        grid-template-columns: 0.82fr 1.2fr 0.82fr;
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .flow-column { display: grid; gap: 10px; align-content: center; }
+      .flow-title { margin-bottom: 8px; color: var(--muted); font-size: 11px; }
+
+      .flow-item {
+        border: 1px solid var(--line);
+        background: var(--paper);
+        padding: 14px;
+        font-size: 13px;
+      }
+
+      .flow-item small {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--muted);
+        font-size: 9px;
+      }
+
+      .agent-center {
+        position: relative;
+        min-height: 560px;
+        border: 1px solid var(--ink);
+        background: var(--wash);
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 28px;
+      }
+
+      .agent-center::before,
+      .agent-center::after {
+        content: "";
+        position: absolute;
+        border: 1px solid #bdbdbd;
+      }
+
+      .agent-center::before { inset: 28px; }
+      .agent-center::after { inset: 56px; }
+
+      .agent-center strong {
+        position: relative;
+        z-index: 1;
+        display: block;
+        font-size: clamp(31px, 4vw, 52px);
+        line-height: 1.06;
+        letter-spacing: -0.045em;
+        font-weight: 500;
+      }
+
+      .agent-center span {
+        position: relative;
+        z-index: 1;
+        display: block;
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .decision-ticket {
+        border: 1px solid var(--ink);
+        background: var(--ink);
+        color: #fff;
+        padding: 24px;
+      }
+
+      .decision-ticket strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 18px;
+        line-height: 1.15;
+        letter-spacing: -0.025em;
+        font-weight: 500;
+      }
+
+      .decision-ticket span { color: #bdbdbd; font-size: 13px; }
+
+      .loop-strip {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        border: 1px solid var(--line);
+        background: var(--line);
+        gap: 1px;
+      }
+
+      .loop-step {
+        min-height: 320px;
+        padding: 26px;
+        background: var(--surface);
+        display: grid;
+        align-content: space-between;
+      }
+
+      .loop-step span { color: var(--faint); font-size: 11px; }
+      .loop-step p { margin: 18px 0 0; color: var(--muted); font-size: 14px; }
+
+      .outcomes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(44px, 6vw, 90px);
+        align-items: center;
+      }
+
+      .outcome-visual {
+        padding: clamp(24px, 4vw, 56px);
+        border: 1px solid var(--line);
+        background: var(--surface);
+      }
+
+      .outcome-flow { display: grid; gap: 18px; }
+
+      .outcome-core {
+        border: 1px solid var(--line);
+        background: var(--ink);
+        color: #fff;
+        padding: 24px;
+      }
+
+      .outcome-core strong {
+        display: block;
+        font-size: clamp(31px, 4vw, 52px);
+        line-height: 1.06;
+        letter-spacing: -0.045em;
+        font-weight: 500;
+      }
+
+      .outcome-core span { display: block; margin-top: 10px; color: #bdbdbd; font-size: 13px; }
+      .outcome-arrow { color: var(--muted); font-size: 12px; }
+
+      .outcome-branches {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .outcome-branch {
+        min-height: 118px;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        padding: 16px;
+        display: grid;
+        align-content: space-between;
+      }
+
+      .outcome-branch small { color: var(--muted); font-size: 10px; }
+
+      .trust-layout {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: clamp(44px, 8vw, 130px);
+        align-items: start;
+      }
+
+      .log { border: 1px solid var(--line); background: var(--surface); }
+
+      .log-row {
+        display: grid;
+        grid-template-columns: 120px 1fr auto;
+        gap: 22px;
+        align-items: start;
+        padding: 28px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .log-row:last-child { border-bottom: 0; }
+      .log-row time,
+      .log-row em { color: var(--muted); font-size: 11px; font-style: normal; }
+
+      .log-row strong {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 18px;
+        line-height: 1.15;
+        letter-spacing: -0.025em;
+        font-weight: 500;
+      }
+
+      .log-row p { margin: 0; color: var(--muted); font-size: 14px; }
+
+      .final { background: var(--dark); color: #f4f4f2; }
+
+      .final .section {
+        padding-top: clamp(140px, 14vw, 250px);
+        padding-bottom: clamp(90px, 9vw, 160px);
+      }
+
+      .final-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: clamp(44px, 8vw, 130px);
+        align-items: end;
+      }
+
+      .final .copy,
+      .final .kicker { color: #bdbdbd; }
+
+      .final .btn {
+        border: 1px solid #f4f4f2;
+        background: #f4f4f2;
+        color: #111111;
+      }
+
+      .final .btn .arrow { background: rgba(17, 17, 17, 0.1); }
+      .final .btn.secondary { border-color: rgba(244, 244, 242, 0.72); background: transparent; color: #f4f4f2; }
+      .final .btn.secondary .arrow { background: rgba(244, 244, 242, 0.16); }
+
+      .footer {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 28px var(--gutter) 44px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        color: #9c9c9c;
+        font-size: 12px;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(36px);
+        animation: reveal 900ms var(--ease) forwards;
+      }
+
+      .d1 { animation-delay: 120ms; }
+      .d2 { animation-delay: 240ms; }
+      .d3 { animation-delay: 360ms; }
+
+      @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+
+      @media (max-width: 980px) {
+        .nav { top: 12px; width: calc(100% - 20px); }
+        .nav-inner { grid-template-columns: 1fr auto; }
+        .nav-links { display: none; }
+        .hero-layout,
+        .contrast-grid,
+        .story-card,
+        .wide-intro,
+        .stack-grid,
+        .agent-copy,
+        .agent-board,
+        .outcomes,
+        .trust-layout,
+        .final-grid { grid-template-columns: 1fr; }
+        .story-card { position: relative; top: auto; min-height: auto; }
+        .story-card:nth-child(2),
+        .story-card:nth-child(3) { top: auto; }
+        .hero-panel { min-height: 560px; }
+        .proof-row,
+        .contrast-panels,
+        .loop-strip { grid-template-columns: 1fr 1fr; }
+        .proof:nth-child(2) { border-right: 0; }
+        .proof:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
+        .stack-card.featured { min-height: 420px; }
+        .agent-center { min-height: 420px; }
+        .outcome-branches { grid-template-columns: 1fr; }
+        .footer { flex-direction: column; }
+      }
+
+      @media (max-width: 620px) {
+        .section { padding-left: 18px; padding-right: 18px; }
+        .mega { font-size: clamp(42px, 14vw, 78px); }
+        h2 { font-size: clamp(31px, 11vw, 52px); }
+        .nav-action .btn { min-height: 34px; padding-left: 12px; }
+        .nav-action .btn span:first-child { display: none; }
+        .proof-row,
+        .contrast-panels,
+        .loop-strip { grid-template-columns: 1fr; }
+        .proof { border-right: 0; border-bottom: 1px solid var(--line); }
+        .proof:last-child { border-bottom: 0; }
+        .image-title { display: grid; }
+        .hero-panel { min-height: 500px; }
+        .decision-surface { inset: 78px 24px 94px; }
+        .micro-node { min-width: 110px; }
+        .mn1, .mn3 { left: 10px; }
+        .mn2, .mn4 { right: 10px; }
+        .stack-card { min-height: 300px; }
+        .agent-center { min-height: 360px; }
+        .log-row { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="nav" aria-label="Primary navigation">
+        <div class="nav-inner">
+          <a class="brand" href="#top" aria-label="Providio home">
+            <span class="brand-mark">P</span>
+            <span>Providio</span>
+          </a>
+          <div class="nav-links">
+            <a href="#wrong-layer">AI layer</a>
+            <a href="#drag">Decision drag</a>
+            <a href="#context">Context</a>
+            <a href="#agent">Flight agent</a>
+            <a href="#trust">Trust</a>
+          </div>
+          <div class="nav-action">
+            <a class="btn" href="#contact"><span>Talk to us</span><span class="arrow">→</span></a>
+          </div>
+        </div>
+      </nav>
+
+      <header id="top" class="section first">
+        <div class="hero-layout">
+          <div class="hero-copy reveal">
+            <p class="kicker">AI-native system of action</p>
+            <h1 class="mega">Coordinate the decisions behind revenue.</h1>
+            <p class="lead">Providio helps airlines turn demand, pricing, marketing, and finance signals into governed action before the window closes.</p>
+            <div class="hero-actions">
+              <a class="btn" href="#contact"><span>Talk to us</span><span class="arrow">→</span></a>
+              <a class="btn secondary" href="#agent"><span>See the system</span><span class="arrow">↓</span></a>
+            </div>
+          </div>
+          <aside class="reveal d2">
+            <div class="hero-panel" aria-label="Hero visual placeholder: decision system">
+              <div class="panel-label"><span>Outcome execution</span><span>Wireframe visual</span></div>
+              <div class="decision-surface">
+              <div class="surface-title">
+                  <div><strong>One decision surface.</strong><span>signals / rules / teams / action / trace</span></div>
+                </div>
+              </div>
+              <div class="micro-node mn1"><small>Signal</small>Market shift</div>
+              <div class="micro-node mn2"><small>Policy</small>Guardrail</div>
+              <div class="micro-node mn3"><small>Team</small>Revenue</div>
+              <div class="micro-node mn4"><small>Action</small>Queued</div>
+              <div class="micro-node mn5"><small>Trace</small>Captured</div>
+            </div>
+          </aside>
+        </div>
+      </header>
+
+      <section class="proof-section reveal d3" aria-label="Proof points">
+        <div class="proof-row">
+          <div class="proof"><strong>30-90d</strong><span>pilot path to value</span></div>
+          <div class="proof"><strong>96h+</strong><span>decision latency to compress</span></div>
+          <div class="proof"><strong>630k+</strong><span>daily airline signals</span></div>
+          <div class="proof"><strong>1st</strong><span>outcome: revenue capture</span></div>
+        </div>
+      </section>
+
+      <section id="wrong-layer" class="contrast-section">
+        <div class="section contrast-grid">
+          <div class="reveal">
+            <p class="kicker">The wrong layer</p>
+            <h2>AI made the work faster. The decision still waits.</h2>
+            <p class="copy">Most AI tools help one person or one team move faster. Providio helps decisions move across teams.</p>
+          </div>
+          <div class="contrast-panels reveal d2" aria-label="Copilots versus Providio visual">
+            <div class="contrast-card">
+              <div>
+                <p class="caption">Task acceleration</p>
+                <h3>Teams move faster.</h3>
+              </div>
+              <div class="visual-lines"><span></span><span></span><span></span></div>
+              <p class="copy">More output, same handoffs, same alignment delays.</p>
+            </div>
+            <div class="contrast-card dark">
+              <div>
+                <p class="caption">Outcome execution</p>
+                <h3>Decisions move across teams.</h3>
+              </div>
+              <div class="visual-lines"><span></span><span></span><span></span></div>
+              <p class="copy">Shared context, governed action, and a trace for every recommendation.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="drag" class="story-band">
+        <div class="story-inner">
+          <div class="story-intro reveal">
+            <div>
+              <p class="kicker">Decision drag</p>
+              <h2>The delay is between teams.</h2>
+              <p class="copy">By the time pricing, marketing, finance, and operations align, the market has already moved.</p>
+            </div>
+          </div>
+
+          <div class="story-stack">
+            <article class="story-card reveal d1">
+              <div class="card-copy">
+                <p class="caption">01 / Coordination tax</p>
+                <h3>Everyone is right locally. The business is late globally.</h3>
+                <p class="copy">Each team optimizes its own KPI. Providio coordinates the shared outcome.</p>
+              </div>
+              <div class="image-block" aria-label="Visual placeholder: fragmented departments">
+                <div class="image-title"><strong>Five teams. One outcome. No shared decision surface.</strong><span>Visual: handoffs, local KPIs, and P&amp;L leakage.</span></div>
+              </div>
+            </article>
+
+            <article class="story-card reveal d2">
+              <div class="card-copy">
+                <p class="caption">02 / Human middleware</p>
+                <h3>Your operators are still stitching decisions together.</h3>
+                <p class="copy">They should be judging tradeoffs, not reconciling spreadsheets and chasing context.</p>
+                <blockquote class="big-quote">“Organic API”</blockquote>
+              </div>
+              <div class="image-block dark" aria-label="Visual placeholder: operator workflow">
+                <div class="image-title"><strong>From manual bridge to strategic operator.</strong><span>Visual: before/after operator workflow.</span></div>
+              </div>
+            </article>
+
+            <article class="story-card reveal d3">
+              <div class="card-copy">
+                <p class="caption">03 / Missing layer</p>
+                <h3>Teams need shared business context.</h3>
+                <p class="copy">The rules, thresholds, tradeoffs, and approvals that define how decisions actually get made.</p>
+              </div>
+              <div class="image-block" aria-label="Visual placeholder: context layer">
+                <div class="image-title"><strong>Signals become decisions when context binds them.</strong><span>Visual: shared rules, tradeoffs, approvals, and actions.</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="context" class="system-section">
+        <div class="section">
+          <div class="wide-intro reveal">
+            <div>
+              <p class="kicker">Providio context stack</p>
+              <h2>Providio captures how decisions actually get made.</h2>
+            </div>
+            <p class="copy">We encode goals, constraints, approval paths, and real decision scenarios, then use them to train agents that act inside your guardrails.</p>
+          </div>
+
+          <div class="stack-grid reveal d2" aria-label="Context stack cards">
+            <div class="stack-card">
+              <div><p class="caption">Layer 01</p><strong>Capture decision rules</strong><p>Goals, constraints, approval thresholds, and stakeholder priorities.</p></div>
+              <div class="mini-diagram"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+            </div>
+            <div class="stack-card featured">
+              <div><p class="caption">Layer 02</p><strong>Generate scenarios</strong><p>Thousands of decision examples from real operational snapshots.</p></div>
+              <div class="mini-diagram"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+            </div>
+            <div class="stack-card">
+              <div><p class="caption">Layer 03</p><strong>Train agents</strong><p>Small models learn how your business weighs revenue, capacity, risk, and margin.</p></div>
+              <div class="mini-diagram"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="agent" class="section agent-section">
+        <div class="agent-stage">
+          <div class="agent-copy reveal">
+            <div>
+              <p class="kicker">Signature product idea</p>
+              <h2>A flight becomes a decision agent.</h2>
+            </div>
+            <div>
+              <p class="lead">A flight is no longer a row in a dashboard. It becomes a live decision surface.</p>
+              <p class="copy">Each flight reads the signals around it, weighs the tradeoffs, and prepares the next best action.</p>
+            </div>
+          </div>
+
+          <div class="agent-board reveal d2" aria-label="Flight-as-an-AI-Agent visual placeholder">
+            <div class="flow-column">
+              <div class="flow-title">Signals in</div>
+              <div class="flow-item"><small>Demand</small>Search volume rising</div>
+              <div class="flow-item"><small>Supply</small>Inventory pressure</div>
+              <div class="flow-item"><small>Pricing</small>Fare boundary active</div>
+              <div class="flow-item"><small>Finance</small>Margin threshold</div>
+            </div>
+            <div class="agent-center"><div><strong>Flight 4821</strong><span>JFK to LAX / departure in 42h</span><span>Agents reason with the business context around this flight.</span></div></div>
+            <div class="flow-column">
+              <div class="flow-title">Action out</div>
+              <div class="decision-ticket"><strong>Action prepared</strong><span>Adjust fare boundary and coordinate targeted demand.</span></div>
+              <div class="flow-item"><small>Approval</small>Human review if policy requires it</div>
+              <div class="flow-item"><small>Trace</small>Signals, constraints, and outcome captured</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wide-intro reveal">
+          <div>
+            <p class="kicker">Governed execution loop</p>
+            <h2>From signal to action in one loop.</h2>
+          </div>
+          <p class="copy">Providio learns the rules, reads the signals, reasons through tradeoffs, executes with approval, and records the trace.</p>
+        </div>
+        <div class="loop-strip reveal d2" aria-label="Learn See Reason Act Trust loop">
+          <div class="loop-step"><span>01</span><div><h3>Learn</h3><p>Capture the goals, rules, and approval paths.</p></div></div>
+          <div class="loop-step"><span>02</span><div><h3>See</h3><p>Read the live signals across teams and systems.</p></div></div>
+          <div class="loop-step"><span>03</span><div><h3>Reason</h3><p>Weigh tradeoffs across revenue, demand, and capacity.</p></div></div>
+          <div class="loop-step"><span>04</span><div><h3>Act</h3><p>Prepare or execute the governed playbook.</p></div></div>
+          <div class="loop-step"><span>05</span><div><h3>Trust</h3><p>Record the trigger, rules, approval, and result.</p></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="outcomes">
+          <div class="reveal">
+            <p class="kicker">Outcome expansion</p>
+            <h2>The first outcome teaches the next one.</h2>
+            <p class="lead">Revenue capture proves the system.</p>
+            <p class="copy">The same context layer then expands into pricing, marketing, customer intelligence, operations, and finance.</p>
+          </div>
+          <div class="outcome-visual reveal d2" aria-label="Outcome expansion visual placeholder">
+            <div class="outcome-flow">
+              <div class="outcome-core"><strong>Revenue Capture</strong><span>First outcome. First proof of value.</span></div>
+              <div class="outcome-arrow">Shared context layer expands into</div>
+              <div class="outcome-branches">
+                <div class="outcome-branch"><small>Outcome 02</small><strong>Dynamic Pricing</strong></div>
+                <div class="outcome-branch"><small>Outcome 03</small><strong>Marketing Optimization</strong></div>
+                <div class="outcome-branch"><small>Outcome 04</small><strong>Customer Intelligence</strong></div>
+                <div class="outcome-branch"><small>Outcome 05</small><strong>Operations Alignment</strong></div>
+              </div>
+              <div class="outcome-core"><strong>Same context. More outcomes.</strong><span>Every captured decision strengthens the next deployment.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="trust" class="section">
+        <div class="trust-layout">
+          <div class="reveal">
+            <p class="kicker">Trust architecture</p>
+            <h2>Autonomy earns its permissions.</h2>
+            <p class="lead">Providio does not ask the enterprise to trust a black box.</p>
+            <p class="copy">Every recommendation shows what triggered it, which rules shaped it, who approved it, and what happened next.</p>
+          </div>
+          <div class="log reveal d2" aria-label="Decision trace visual placeholder">
+            <div class="log-row"><time>08:14</time><div><strong>Signal detected</strong><p>Demand moved before the reporting cycle caught it.</p></div><em>Signal</em></div>
+            <div class="log-row"><time>08:15</time><div><strong>Scenario matched</strong><p>The system found a similar decision pattern.</p></div><em>Context</em></div>
+            <div class="log-row"><time>08:16</time><div><strong>Guardrails checked</strong><p>Pricing, finance, and policy rules validated.</p></div><em>Control</em></div>
+            <div class="log-row"><time>08:18</time><div><strong>Action queued</strong><p>Recommendation sent for review with full trace.</p></div><em>HITL</em></div>
+            <div class="log-row"><time>08:21</time><div><strong>Outcome captured</strong><p>Result feeds the next scenario set.</p></div><em>Learn</em></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="final">
+        <div class="section">
+          <div class="final-grid reveal">
+            <div>
+              <p class="kicker">Design partner conversations open</p>
+              <h2>If this drag feels familiar, map one decision.</h2>
+            </div>
+            <div>
+              <p class="copy">We work with a small number of airline and mobility operators to encode one high-value decision flow and prove value fast.</p>
+              <div class="hero-actions" style="margin-top: 30px">
+                <a class="btn" href="mailto:hello@providio.ai"><span>Start a conversation</span><span class="arrow">→</span></a>
+                <a class="btn secondary" href="#top"><span>Back to top</span><span class="arrow">↑</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer">
+          <span>Providio AI</span>
+          <span>Wireframe v4. Same typography and color system. Sharper story flow.</span>
+        </footer>
+      </section>
+    </div>
+  </body>
+</html>
