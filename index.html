@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Providio Landing Wireframe V4</title>
+    <title>Providio Landing Wireframe V7</title>
     <style>
       :root {
         --ink: #101010;
@@ -11,15 +11,17 @@
         --muted: #676767;
         --faint: #a6a6a6;
         --line: #d8d8d4;
-        --line-dark: #4a4a4a;
+        --line-dark: #444444;
         --paper: #f5f5f1;
         --surface: #ffffff;
         --wash: #ecece8;
+        --warm: #efeee8;
         --dark: #181818;
         --dark-2: #252525;
         --max: 1500px;
+        --wide: 1680px;
         --gutter: clamp(22px, 3vw, 56px);
-        --section: clamp(96px, 10vw, 180px);
+        --section: clamp(108px, 10vw, 180px);
         --ease: cubic-bezier(0.22, 1, 0.36, 1);
       }
 
@@ -42,9 +44,9 @@
         position: fixed;
         top: 22px;
         left: 50%;
+        z-index: 20;
+        width: min(calc(100% - 32px), 980px);
         transform: translateX(-50%);
-        z-index: 10;
-        width: min(calc(100% - 32px), 920px);
         border: 1px solid rgba(16, 16, 16, 0.12);
         background: rgba(245, 245, 241, 0.9);
         backdrop-filter: blur(18px);
@@ -102,7 +104,7 @@
         transition: transform 500ms var(--ease), background 500ms var(--ease);
       }
 
-      .btn:hover { background: #2b2b2b; }
+      .btn:hover { background: #2b2b2b; transform: translateY(-1px); }
       .btn:active { transform: scale(0.98); }
 
       .btn .arrow {
@@ -130,17 +132,21 @@
         padding: var(--section) var(--gutter);
       }
 
-      .section.first { padding-top: clamp(150px, 15vw, 250px); }
+      .section.first { padding-top: clamp(160px, 15vw, 255px); }
 
       .kicker,
       .caption,
+      .system-label,
+      .metric span,
       .flow-title,
       .flow-item small,
+      .loop-step span,
       .outcome-arrow,
       .outcome-branch small,
-      .loop-step span,
       .log-row time,
-      .log-row em {
+      .log-row em,
+      .architecture-step span,
+      .operator-note span {
         font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
         font-weight: 500;
         letter-spacing: 0.08em;
@@ -153,21 +159,27 @@
         font-size: 11px;
       }
 
+      .caption {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
       .mega {
         margin: 0;
-        max-width: 760px;
-        font-size: clamp(42px, 6vw, 78px);
-        line-height: 1.02;
-        letter-spacing: -0.055em;
+        max-width: 820px;
+        font-size: clamp(45px, 6.4vw, 88px);
+        line-height: 0.98;
+        letter-spacing: -0.06em;
         font-weight: 500;
       }
 
       h2 {
         margin: 0;
-        max-width: 680px;
-        font-size: clamp(31px, 4vw, 52px);
-        line-height: 1.06;
-        letter-spacing: -0.045em;
+        max-width: 780px;
+        font-size: clamp(34px, 4.6vw, 62px);
+        line-height: 1.02;
+        letter-spacing: -0.05em;
         font-weight: 500;
       }
 
@@ -183,53 +195,66 @@
 
       .lead {
         margin: 0;
-        max-width: 690px;
+        max-width: 720px;
         color: var(--text);
-        font-size: clamp(18px, 2vw, 23px);
-        line-height: 1.35;
+        font-size: clamp(18px, 2vw, 24px);
+        line-height: 1.34;
         letter-spacing: -0.025em;
         font-weight: 400;
       }
 
       .copy {
         margin: 0;
-        max-width: 520px;
+        max-width: 540px;
         color: var(--muted);
         font-size: 16px;
         line-height: 1.62;
       }
 
-      .caption {
-        color: var(--muted);
-        font-size: 12px;
-      }
-
       .hero-layout {
         display: grid;
-        grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr);
-        gap: clamp(44px, 6vw, 104px);
+        grid-template-columns: minmax(0, 0.92fr) minmax(470px, 1.08fr);
+        gap: clamp(54px, 7vw, 124px);
         align-items: end;
       }
 
       .hero-copy { display: grid; gap: 34px; }
       .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
-      .hero-panel {
-        min-height: 620px;
-        position: relative;
-        overflow: hidden;
+      .hero-layout.centered {
+        min-height: clamp(520px, 62vh, 760px);
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center;
+        text-align: center;
+      }
+
+      .hero-layout.centered .hero-copy {
+        justify-items: center;
+      }
+
+      .hero-layout.centered .mega,
+      .hero-layout.centered .lead {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .architecture-console {
+        min-height: 660px;
         border: 1px solid var(--ink);
         background: var(--dark);
         color: #f2f2f0;
+        padding: 28px;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 26px;
       }
 
-      .panel-label {
-        position: absolute;
-        top: 22px;
-        left: 22px;
-        right: 22px;
+      .console-top,
+      .console-bottom {
         display: flex;
         justify-content: space-between;
+        gap: 22px;
         color: #b7b7b7;
         font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
         font-size: 10px;
@@ -237,120 +262,712 @@
         text-transform: uppercase;
       }
 
-      .decision-surface {
-        position: absolute;
-        inset: 86px 44px 82px;
+      .console-core {
         border: 1px solid var(--line-dark);
+        display: grid;
+        grid-template-columns: 0.76fr 1.1fr 0.76fr;
+        gap: 1px;
+        background: var(--line-dark);
+        min-height: 460px;
       }
 
-      .decision-surface::before,
-      .decision-surface::after {
+      .console-col,
+      .console-center {
+        background: var(--dark);
+        padding: 22px;
+        display: grid;
+        align-content: center;
+        gap: 12px;
+      }
+
+      .console-center {
+        background: #222222;
+        text-align: center;
+        place-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .console-center::before,
+      .console-center::after {
         content: "";
         position: absolute;
-        border: 1px solid #393939;
+        border: 1px solid rgba(244, 244, 242, 0.12);
       }
 
-      .decision-surface::before { inset: 44px; }
-      .decision-surface::after { inset: 92px; }
+      .console-center::before { inset: 32px; }
+      .console-center::after { inset: 66px; }
 
-      .surface-title {
-        position: absolute;
-        inset: 0;
-        display: grid;
-        place-items: center;
-        text-align: center;
-      }
+      .console-center div { position: relative; z-index: 1; }
 
-      .surface-title strong {
+      .console-center strong {
         display: block;
-        max-width: 310px;
-        font-size: clamp(31px, 4vw, 52px);
-        line-height: 1.06;
-        letter-spacing: -0.045em;
+        max-width: 330px;
+        font-size: clamp(34px, 4vw, 58px);
+        line-height: 1;
+        letter-spacing: -0.05em;
         font-weight: 500;
       }
 
-      .surface-title span {
+      .console-center span {
         display: block;
         margin-top: 16px;
         color: #a0a0a0;
         font-size: 13px;
       }
 
-      .micro-node {
-        position: absolute;
-        min-width: 126px;
+      .system-label { color: #8f8f8f; font-size: 9px; }
+
+      .console-item {
         border: 1px solid var(--line-dark);
-        background: #242424;
-        padding: 11px 12px;
+        background: var(--dark-2);
+        padding: 12px;
         color: #dfdfdf;
         font-size: 12px;
       }
 
-      .micro-node small {
+      .abstract-stage {
+        position: relative;
+        min-height: 620px;
+        border: 1px solid var(--ink);
+        background: var(--dark);
+        color: #f4f4f2;
+        overflow: hidden;
+      }
+
+      .abstract-stage.light {
+        background: var(--surface);
+        color: var(--ink);
+        border-color: var(--line);
+      }
+
+      .abstract-stage.warm {
+        background: var(--warm);
+        color: var(--ink);
+        border-color: var(--line);
+      }
+
+      .abstract-stage::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+        background-size: 42px 42px;
+        opacity: 0.42;
+        pointer-events: none;
+      }
+
+      .abstract-stage.light::before,
+      .abstract-stage.warm::before {
+        background:
+          linear-gradient(rgba(16,16,16,0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(16,16,16,0.045) 1px, transparent 1px);
+      }
+
+      .visual-label {
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        bottom: 24px;
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        color: inherit;
+        z-index: 2;
+      }
+
+      .visual-label strong {
+        max-width: 350px;
+        font-size: 28px;
+        line-height: 0.96;
+        letter-spacing: -0.055em;
+        font-weight: 500;
+      }
+
+      .visual-label span {
+        max-width: 250px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .abstract-stage:not(.light):not(.warm) .visual-label span { color: #bdbdbd; }
+
+      .action-dot,
+      .action-line,
+      .action-block,
+      .action-ring,
+      .action-plate,
+      .action-node,
+      .action-stamp {
+        position: absolute;
         display: block;
-        margin-bottom: 5px;
-        color: #8f8f8f;
+        z-index: 1;
+      }
+
+      .action-dot {
+        width: 10px;
+        height: 10px;
+        background: #f05a1a;
+      }
+
+      .action-line { height: 1px; background: currentColor; opacity: 0.28; }
+      .action-block { border: 1px solid currentColor; opacity: 0.24; }
+      .action-ring { border: 1px solid currentColor; opacity: 0.24; border-radius: 999px; }
+      .action-plate { border: 1px solid currentColor; background: rgba(255,255,255,0.04); }
+      .action-node { border: 1px solid currentColor; background: rgba(255,255,255,0.05); }
+      .action-stamp { border: 1px solid #f05a1a; color: #f05a1a; }
+
+      .execution-core .core-unit {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: min(280px, 38%);
+        aspect-ratio: 1;
+        transform: translate(-50%, -50%);
+        border: 1px solid #f4f4f2;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        z-index: 2;
+      }
+
+      .execution-core .core-unit strong {
+        max-width: 180px;
+        font-size: clamp(30px, 4vw, 52px);
+        line-height: 0.96;
+        letter-spacing: -0.055em;
+        font-weight: 500;
+      }
+
+      .execution-core .action-output {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 42%;
+        height: 4px;
+        transform: translateY(-50%);
+        background: #f05a1a;
+        z-index: 2;
+      }
+
+      .execution-core .action-output::after {
+        content: "";
+        position: absolute;
+        right: -10px;
+        top: 50%;
+        width: 18px;
+        height: 18px;
+        transform: translateY(-50%) rotate(45deg);
+        border-top: 4px solid #f05a1a;
+        border-right: 4px solid #f05a1a;
+      }
+
+      .execution-core .input-line {
+        position: absolute;
+        right: 50%;
+        height: 1px;
+        background: #f4f4f2;
+        opacity: 0.24;
+        z-index: 1;
+      }
+
+      .execution-core .input-line::before {
+        content: "";
+        position: absolute;
+        left: -5px;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        transform: translateY(-50%);
+        background: #f4f4f2;
+      }
+
+      .blocked-flow .barrier {
+        position: absolute;
+        left: 50%;
+        top: 18%;
+        bottom: 22%;
+        width: 88px;
+        transform: translateX(-50%);
+        background: var(--dark);
+        border: 1px solid var(--ink);
+        z-index: 2;
+      }
+
+      .blocked-flow .flow-line {
+        position: absolute;
+        left: 9%;
+        right: 52%;
+        height: 2px;
+        background: var(--ink);
+        opacity: 0.18;
+      }
+
+      .blocked-flow .flow-line.pass {
+        left: 9%;
+        right: 9%;
+        height: 4px;
+        background: #f05a1a;
+        opacity: 1;
+        z-index: 3;
+      }
+
+      .silo-system {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 500px;
+        border: 1px solid var(--line);
+        background: var(--line);
+        gap: 1px;
+      }
+
+      .silo-panel {
+        position: relative;
+        background: var(--surface);
+        min-height: 500px;
+        overflow: hidden;
+      }
+
+      .silo-panel.dark { background: var(--dark); color: #f4f4f2; }
+      .silo-panel .caption { position: absolute; left: 24px; top: 24px; z-index: 2; }
+      .silo-panel.dark .caption { color: #bdbdbd; }
+
+      .silo-island,
+      .system-node {
+        position: absolute;
+        width: 72px;
+        height: 72px;
+        border: 1px solid currentColor;
+        opacity: 0.38;
+      }
+
+      .system-node { opacity: 0.7; }
+
+      .system-spine {
+        position: absolute;
+        left: 24%;
+        right: 24%;
+        top: 50%;
+        height: 2px;
+        background: #f05a1a;
+        transform: translateY(-50%);
+      }
+
+      .system-output {
+        position: absolute;
+        right: 11%;
+        top: 50%;
+        width: 76px;
+        height: 76px;
+        transform: translateY(-50%);
+        background: #f05a1a;
+      }
+
+      .architecture-visual {
+        min-height: 700px;
+        margin-top: clamp(54px, 7vw, 110px);
+      }
+
+      .decision-stack .action-plate {
+        left: 13%;
+        right: 13%;
+        height: 76px;
+        transform: skewY(-7deg);
+      }
+
+      .decision-stack .action-plate:nth-child(1) { top: 18%; opacity: 0.14; }
+      .decision-stack .action-plate:nth-child(2) { top: 28%; opacity: 0.22; }
+      .decision-stack .action-plate:nth-child(3) { top: 38%; opacity: 0.3; }
+      .decision-stack .action-plate:nth-child(4) { top: 48%; opacity: 0.38; }
+      .decision-stack .action-plate:nth-child(5) { top: 58%; opacity: 0.46; }
+
+      .decision-stack .action-beam {
+        position: absolute;
+        left: 50%;
+        top: 12%;
+        bottom: 18%;
+        width: 5px;
+        background: #f05a1a;
+        transform: translateX(-50%) skewY(-7deg);
+        z-index: 3;
+      }
+
+      .decision-stack .stack-label {
+        position: absolute;
+        right: 10%;
+        color: #bdbdbd;
         font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
-        font-size: 9px;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        z-index: 4;
+      }
+
+      .operator-reach .operator-point {
+        position: absolute;
+        left: 50%;
+        top: 52%;
+        width: 22px;
+        height: 22px;
+        transform: translate(-50%, -50%);
+        background: var(--ink);
+        z-index: 4;
+      }
+
+      .operator-reach .reach-field {
+        position: absolute;
+        left: 50%;
+        top: 52%;
+        border: 1px solid currentColor;
+        transform: translate(-50%, -50%);
+        opacity: var(--o);
+      }
+
+      .operator-reach .approval-mark {
+        position: absolute;
+        right: 18%;
+        top: 26%;
+        width: 92px;
+        height: 92px;
+        border: 1px solid #f05a1a;
+        color: #f05a1a;
+        display: grid;
+        place-items: center;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transform: rotate(-10deg);
+        z-index: 4;
+      }
+
+      .closed-loop .loop-path {
+        position: absolute;
+        left: 15%;
+        right: 15%;
+        top: 18%;
+        bottom: 22%;
+        border: 1px solid currentColor;
+        opacity: 0.28;
+      }
+
+      .closed-loop .loop-node {
+        position: absolute;
+        width: 96px;
+        height: 96px;
+        border: 1px solid currentColor;
+        background: var(--surface);
+        display: grid;
+        place-items: center;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
-      .mn1 { top: 122px; left: 24px; }
-      .mn2 { top: 150px; right: 28px; }
-      .mn3 { bottom: 128px; left: 34px; }
-      .mn4 { bottom: 112px; right: 38px; }
-      .mn5 { left: 50%; bottom: 34px; transform: translateX(-50%); }
+      .closed-loop .loop-node.active { background: #f05a1a; border-color: #f05a1a; color: #fff; }
+
+      .expansion-field .proof-node {
+        position: absolute;
+        left: 50%;
+        top: 48%;
+        width: 190px;
+        height: 190px;
+        transform: translate(-50%, -50%);
+        background: #f05a1a;
+        color: #fff;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        z-index: 4;
+      }
+
+      .expansion-field .proof-node strong {
+        max-width: 120px;
+        font-size: 28px;
+        line-height: 0.96;
+        letter-spacing: -0.055em;
+        font-weight: 500;
+      }
+
+      .expansion-field .ripple {
+        position: absolute;
+        left: 50%;
+        top: 48%;
+        border: 1px solid currentColor;
+        transform: translate(-50%, -50%);
+        opacity: var(--o);
+      }
+
+      .expansion-field .market-node {
+        position: absolute;
+        min-width: 118px;
+        min-height: 74px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        padding: 14px;
+        display: grid;
+        align-content: space-between;
+        color: var(--ink);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        line-height: 1.25;
+        text-transform: uppercase;
+        z-index: 3;
+      }
+
+      .expansion-field .market-node::before {
+        content: "Next";
+        color: var(--muted);
+      }
+
+      .expansion-field .market-node::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background: var(--ink);
+      }
+
+      .value-map {
+        min-height: 610px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        padding: clamp(24px, 4vw, 56px);
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(3, minmax(120px, 1fr));
+        gap: 12px;
+      }
+
+      .value-box,
+      .value-core {
+        position: relative;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        padding: 18px;
+        display: grid;
+        align-content: space-between;
+        min-height: 120px;
+      }
+
+      .value-box::before {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: var(--ink);
+        left: 18px;
+        bottom: 18px;
+      }
+
+      .value-box span,
+      .value-core span {
+        color: var(--muted);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .value-box strong,
+      .value-core strong {
+        max-width: 170px;
+        font-size: clamp(20px, 2vw, 30px);
+        line-height: 1;
+        letter-spacing: -0.045em;
+        font-weight: 500;
+      }
+
+      .value-core {
+        grid-column: 2 / 5;
+        grid-row: 2;
+        background: var(--ink);
+        color: #fff;
+        border-color: var(--ink);
+        text-align: center;
+        place-items: center;
+        align-content: center;
+        gap: 14px;
+      }
+
+      .value-core span { color: #bdbdbd; }
+      .value-core strong { max-width: 300px; font-size: clamp(34px, 4vw, 60px); }
+
+      .value-box.pricing { grid-column: 1 / 3; grid-row: 1; }
+      .value-box.marketing { grid-column: 4 / 6; grid-row: 1; }
+      .value-box.customer { grid-column: 1 / 3; grid-row: 3; }
+      .value-box.operations { grid-column: 3 / 4; grid-row: 3; }
+      .value-box.finance { grid-column: 4 / 6; grid-row: 3; }
+
+      .decision-passport {
+        min-height: 610px;
+        padding: clamp(24px, 4vw, 56px);
+        display: grid;
+        place-items: center;
+      }
+
+      .passport-card {
+        width: min(620px, 100%);
+        min-height: 420px;
+        border: 1px solid #5a5a5a;
+        background: #202020;
+        padding: clamp(24px, 4vw, 42px);
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 28px;
+      }
+
+      .passport-top,
+      .passport-bottom {
+        display: flex;
+        justify-content: space-between;
+        color: #9c9c9c;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .passport-stamps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        align-content: center;
+      }
+
+      .passport-stamps span {
+        aspect-ratio: 1;
+        border: 1px solid #5a5a5a;
+        display: grid;
+        place-items: center;
+        color: #bdbdbd;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .passport-stamps span:last-child {
+        border-color: #f05a1a;
+        color: #f05a1a;
+        transform: rotate(-8deg);
+      }
+
+      .full-visual-section {
+        max-width: var(--wide);
+        margin: 0 auto;
+        padding: var(--section) var(--gutter);
+      }
+
+      .full-visual-copy {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: clamp(44px, 8vw, 130px);
+        align-items: end;
+        margin-bottom: clamp(44px, 6vw, 86px);
+      }
 
       .proof-section {
         max-width: var(--max);
         margin: 0 auto;
-        padding: 0 var(--gutter) clamp(76px, 8vw, 132px);
+        padding: 0 var(--gutter) clamp(90px, 8vw, 140px);
       }
 
       .proof-row {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        border: 1px solid var(--line);
-        background: var(--surface);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
       }
 
-      .proof {
-        padding: 22px;
+      .metric {
+        padding: 26px 22px;
         border-right: 1px solid var(--line);
       }
 
-      .proof:last-child { border-right: 0; }
+      .metric:last-child { border-right: 0; }
 
-      .proof strong {
+      .metric strong {
         display: block;
-        margin-bottom: 8px;
-        font-size: 28px;
+        margin-bottom: 9px;
+        font-size: clamp(46px, 6vw, 84px);
         line-height: 0.92;
         letter-spacing: -0.06em;
         font-weight: 500;
       }
 
-      .proof span {
+      .metric span {
+        display: block;
         color: var(--muted);
-        font-size: 12px;
+        font-size: 11px;
       }
 
-      .contrast-section {
+      .gap-section {
         border-top: 1px solid var(--line);
         border-bottom: 1px solid var(--line);
         background: var(--surface);
       }
 
-      .contrast-grid {
+      .gap-grid {
         display: grid;
-        grid-template-columns: 0.78fr 1.22fr;
+        grid-template-columns: 0.76fr 1.24fr;
         gap: clamp(44px, 8vw, 130px);
         align-items: center;
       }
 
-      .contrast-panels {
+      .gap-visual {
+        border: 1px solid var(--line);
+        background: var(--paper);
+        padding: clamp(22px, 3vw, 42px);
+        min-height: 520px;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 28px;
+      }
+
+      .latency-map {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+        align-items: end;
+      }
+
+      .latency-map span {
+        min-height: var(--h);
+        border: 1px solid var(--line);
+        background: var(--surface);
+        transition: transform 500ms var(--ease), background 500ms var(--ease);
+      }
+
+      .gap-visual:hover .latency-map span:nth-child(odd) { transform: translateY(-12px); background: var(--wash); }
+      .gap-visual:hover .latency-map span:nth-child(even) { transform: translateY(12px); }
+
+      .gap-status {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        align-items: center;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+      }
+
+      .compare-section { background: var(--paper); }
+
+      .compare-grid {
+        max-width: var(--wide);
+        margin: 0 auto;
+        padding: var(--section) var(--gutter);
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: clamp(44px, 8vw, 130px);
+        align-items: center;
+      }
+
+      .compare-panels {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1px;
@@ -358,133 +975,35 @@
         background: var(--line);
       }
 
-      .contrast-card {
-        min-height: 430px;
+      .compare-card {
+        min-height: 440px;
         padding: clamp(24px, 3vw, 42px);
-        background: var(--paper);
+        background: var(--surface);
         display: grid;
         align-content: space-between;
       }
 
-      .contrast-card.dark {
+      .compare-card.dark {
         background: var(--dark);
         color: #f2f2f0;
       }
 
-      .contrast-card .copy { color: inherit; opacity: 0.68; }
+      .compare-card.dark .copy,
+      .compare-card.dark .caption { color: #bdbdbd; }
 
-      .visual-lines { display: grid; gap: 10px; }
+      .path { display: grid; gap: 10px; }
+      .path-row { min-height: 42px; border: 1px solid currentColor; opacity: 0.3; }
+      .path-network { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+      .path-network span { min-height: 84px; border: 1px solid currentColor; opacity: 0.3; }
 
-      .visual-lines span {
-        display: block;
-        height: 36px;
-        border: 1px solid currentColor;
-        opacity: 0.24;
-      }
-
-      .story-band { background: var(--paper); }
-
-      .story-inner {
-        max-width: var(--max);
-        margin: 0 auto;
-        padding: clamp(90px, 10vw, 160px) var(--gutter);
-      }
-
-      .story-intro {
-        min-height: 52vh;
-        display: grid;
-        place-items: center;
-        text-align: center;
-        padding-bottom: clamp(68px, 8vw, 130px);
-      }
-
-      .story-intro .copy {
-        margin: 24px auto 0;
-        max-width: 620px;
-      }
-
-      .story-stack {
-        display: grid;
-        gap: clamp(36px, 5vw, 76px);
-      }
-
-      .story-card {
-        position: sticky;
-        top: 104px;
-        min-height: 72vh;
-        display: grid;
-        grid-template-columns: 0.86fr 1.14fr;
-        gap: clamp(30px, 5vw, 78px);
-        align-items: center;
-        border: 1px solid var(--line);
-        background: var(--surface);
-        padding: clamp(28px, 5vw, 70px);
-      }
-
-      .story-card:nth-child(2) { background: #efefeb; top: 124px; }
-      .story-card:nth-child(3) { background: var(--dark); color: #f4f4f2; border-color: #353535; top: 144px; }
-      .story-card:nth-child(3) .copy,
-      .story-card:nth-child(3) .caption { color: #bdbdbd; }
-
-      .card-copy { display: grid; gap: 22px; }
-
-      .image-block {
-        min-height: clamp(420px, 36vw, 620px);
-        border: 1px solid var(--line);
-        background: var(--wash);
-        color: var(--ink);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .image-block.dark {
-        border-color: #343434;
+      .architecture-section {
         background: var(--dark);
         color: #f4f4f2;
       }
 
-      .image-title {
-        position: absolute;
-        left: 24px;
-        right: 24px;
-        bottom: 24px;
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        color: inherit;
-      }
-
-      .image-title strong {
-        max-width: 270px;
-        font-size: 28px;
-        line-height: 0.92;
-        letter-spacing: -0.055em;
-        font-weight: 500;
-      }
-
-      .image-title span {
-        max-width: 220px;
-        color: var(--muted);
-        font-size: 12px;
-      }
-
-      .dark .image-title span { color: #ababab; }
-
-      .big-quote {
-        margin: 0;
-        padding: 30px 0 0;
-        border-top: 1px solid var(--line);
-        color: var(--text);
-        font-size: clamp(31px, 4vw, 52px);
-        line-height: 1.06;
-        letter-spacing: -0.045em;
-        font-weight: 500;
-      }
-
-      .system-section { background: var(--dark); color: #f4f4f2; }
-      .system-section .kicker,
-      .system-section .copy { color: #bdbdbd; }
-      .system-section .section { max-width: 1680px; }
+      .architecture-section .section { max-width: var(--wide); }
+      .architecture-section .kicker,
+      .architecture-section .copy { color: #bdbdbd; }
 
       .wide-intro {
         display: grid;
@@ -494,44 +1013,89 @@
         margin-bottom: clamp(70px, 8vw, 130px);
       }
 
-      .stack-grid {
+      .architecture-grid {
         display: grid;
-        grid-template-columns: 1fr 1.2fr 1fr;
+        grid-template-columns: repeat(6, 1fr);
         gap: 1px;
-        background: #3c3c3c;
         border: 1px solid #3c3c3c;
+        background: #3c3c3c;
       }
 
-      .stack-card {
-        min-height: 390px;
-        padding: 28px;
+      .architecture-step {
+        min-height: 290px;
+        padding: 26px;
         background: #202020;
         display: grid;
         align-content: space-between;
+        transition: background 500ms var(--ease), color 500ms var(--ease), transform 500ms var(--ease);
       }
 
-      .stack-card.featured { min-height: 560px; background: #efefeb; color: var(--ink); }
-
-      .stack-card strong {
-        display: block;
-        font-size: clamp(31px, 4vw, 52px);
-        line-height: 1.06;
-        letter-spacing: -0.045em;
-        font-weight: 500;
+      .architecture-step:hover {
+        background: #efefeb;
+        color: var(--ink);
+        transform: translateY(-8px);
       }
 
-      .stack-card p { margin: 18px 0 0; max-width: 320px; color: #bdbdbd; }
-      .stack-card.featured p { color: var(--muted); }
+      .architecture-step span { color: #8f8f8f; font-size: 11px; }
+      .architecture-step p { margin: 18px 0 0; color: #bdbdbd; font-size: 14px; line-height: 1.52; }
+      .architecture-step:hover p { color: var(--muted); }
 
-      .mini-diagram { display: grid; gap: 10px; }
-      .bar { height: 34px; border: 1px solid currentColor; opacity: 0.42; }
+      .human-section { background: var(--warm); }
 
-      .agent-section { max-width: 1680px; }
-
-      .agent-stage {
+      .human-layout {
         display: grid;
-        gap: clamp(54px, 8vw, 130px);
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: clamp(44px, 8vw, 130px);
+        align-items: center;
       }
+
+      .operator-board {
+        border: 1px solid var(--line);
+        background: var(--surface);
+        padding: clamp(22px, 3vw, 38px);
+        display: grid;
+        gap: 18px;
+      }
+
+      .operator-core {
+        min-height: 420px;
+        border: 1px solid var(--ink);
+        background: var(--paper);
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 1px;
+        overflow: hidden;
+      }
+
+      .operator-human,
+      .operator-system {
+        padding: 28px;
+        display: grid;
+        align-content: center;
+      }
+
+      .operator-human { background: var(--surface); }
+      .operator-system { background: var(--dark); color: #f4f4f2; }
+      .operator-system .copy { color: #bdbdbd; }
+
+      .operator-note {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+      }
+
+      .operator-note span {
+        background: var(--paper);
+        padding: 14px;
+        color: var(--muted);
+        font-size: 10px;
+      }
+
+      .agent-section { max-width: var(--wide); }
+
+      .agent-stage { display: grid; gap: clamp(54px, 8vw, 130px); }
 
       .agent-copy {
         max-width: var(--max);
@@ -570,7 +1134,7 @@
 
       .agent-center {
         position: relative;
-        min-height: 560px;
+        min-height: 570px;
         border: 1px solid var(--ink);
         background: var(--wash);
         display: grid;
@@ -593,9 +1157,9 @@
         position: relative;
         z-index: 1;
         display: block;
-        font-size: clamp(31px, 4vw, 52px);
-        line-height: 1.06;
-        letter-spacing: -0.045em;
+        font-size: clamp(34px, 4vw, 58px);
+        line-height: 1;
+        letter-spacing: -0.05em;
         font-weight: 500;
       }
 
@@ -626,6 +1190,238 @@
 
       .decision-ticket span { color: #bdbdbd; font-size: 13px; }
 
+      .trace-rail {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+      }
+
+      .trace-rail span {
+        background: var(--paper);
+        padding: 14px;
+        color: var(--muted);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .flight-object {
+        position: relative;
+        min-height: clamp(560px, 62vw, 760px);
+        border: 1px solid var(--ink);
+        background: var(--surface);
+        overflow: hidden;
+        padding: clamp(22px, 4vw, 48px);
+        display: grid;
+        align-content: center;
+      }
+
+      .flight-object::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(rgba(16,16,16,0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(16,16,16,0.045) 1px, transparent 1px);
+        background-size: 46px 46px;
+        pointer-events: none;
+      }
+
+      .flight-card {
+        position: absolute;
+        left: 50%;
+        top: 46%;
+        width: min(520px, 58%);
+        min-height: 280px;
+        transform: translate(-50%, -50%);
+        border: 1px solid var(--ink);
+        background: var(--paper);
+        padding: clamp(24px, 4vw, 46px);
+        display: grid;
+        align-content: space-between;
+        z-index: 3;
+      }
+
+      .flight-card-top,
+      .flight-card-bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        color: var(--muted);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .flight-card strong {
+        display: block;
+        margin: 42px 0 14px;
+        font-size: clamp(44px, 6vw, 88px);
+        line-height: 0.92;
+        letter-spacing: -0.065em;
+        font-weight: 500;
+      }
+
+      .flight-card p {
+        margin: 0;
+        max-width: 320px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .flight-orbit {
+        position: absolute;
+        left: 50%;
+        top: 46%;
+        border: 1px solid var(--ink);
+        opacity: var(--o);
+        transform: translate(-50%, -50%);
+        z-index: 1;
+      }
+
+      .flight-signal {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        background: var(--ink);
+        z-index: 2;
+      }
+
+      .flight-action {
+        position: absolute;
+        right: 13%;
+        top: 45%;
+        min-width: 150px;
+        min-height: 62px;
+        background: #f05a1a;
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        z-index: 4;
+      }
+
+      .flight-meta-rail {
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        bottom: 28px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+        z-index: 4;
+      }
+
+      .flight-meta-rail span {
+        background: var(--paper);
+        padding: 14px;
+        color: var(--muted);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .flight-sequence {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 0.9fr 1.15fr 0.9fr;
+        gap: clamp(16px, 3vw, 34px);
+        align-items: center;
+      }
+
+      .flight-sequence::before {
+        content: "";
+        position: absolute;
+        left: 12%;
+        right: 12%;
+        top: 50%;
+        height: 1px;
+        background: var(--line);
+        z-index: -1;
+      }
+
+      .flight-inputs,
+      .flight-outputs {
+        display: grid;
+        gap: 10px;
+      }
+
+      .signal-card,
+      .action-card {
+        min-height: 86px;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        padding: 14px;
+        display: grid;
+        align-content: space-between;
+      }
+
+      .signal-card span,
+      .action-card span,
+      .flight-hub span,
+      .flight-hub em {
+        color: var(--muted);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        font-style: normal;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .signal-card strong,
+      .action-card strong {
+        font-size: 15px;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+        font-weight: 500;
+      }
+
+      .flight-hub {
+        min-height: 430px;
+        border: 1px solid var(--ink);
+        background: var(--paper);
+        padding: clamp(24px, 4vw, 44px);
+        display: grid;
+        align-content: space-between;
+        box-shadow: 0 0 0 18px var(--surface), 0 0 0 19px var(--line);
+      }
+
+      .flight-hub strong {
+        display: block;
+        margin: 26px 0 14px;
+        font-size: clamp(48px, 6vw, 92px);
+        line-height: 0.9;
+        letter-spacing: -0.065em;
+        font-weight: 500;
+      }
+
+      .flight-hub p {
+        margin: 0;
+        max-width: 330px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .action-card.ready {
+        background: #f05a1a;
+        border-color: #f05a1a;
+        color: #fff;
+      }
+
+      .action-card.ready span { color: rgba(255,255,255,0.72); }
+
       .loop-strip {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
@@ -635,19 +1431,121 @@
       }
 
       .loop-step {
-        min-height: 320px;
+        min-height: 300px;
         padding: 26px;
         background: var(--surface);
         display: grid;
         align-content: space-between;
+        transition: background 500ms var(--ease), color 500ms var(--ease);
       }
 
+      .loop-step:hover { background: var(--dark); color: #f4f4f2; }
       .loop-step span { color: var(--faint); font-size: 11px; }
       .loop-step p { margin: 18px 0 0; color: var(--muted); font-size: 14px; }
+      .loop-step:hover p { color: #bdbdbd; }
+
+      .connected-loop {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 18px;
+        padding-bottom: 54px;
+      }
+
+      .connected-loop::before {
+        content: "";
+        position: absolute;
+        left: 7%;
+        right: 7%;
+        bottom: 20px;
+        height: 2px;
+        background: var(--line);
+      }
+
+      .connected-step {
+        position: relative;
+        z-index: 1;
+        min-height: 240px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        padding: 24px;
+        display: grid;
+        align-content: space-between;
+        overflow: visible;
+        transition: background 500ms var(--ease), color 500ms var(--ease), border-color 500ms var(--ease), transform 500ms var(--ease);
+      }
+
+      .connected-step::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -41px;
+        width: 14px;
+        height: 14px;
+        background: var(--line);
+        transform: translateX(-50%);
+        transition: background 500ms var(--ease), transform 500ms var(--ease);
+      }
+
+      .connected-step strong {
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        font-weight: 500;
+      }
+
+      .connected-step span {
+        color: var(--faint);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .connected-step p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.52;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 500ms var(--ease), transform 500ms var(--ease), color 500ms var(--ease);
+      }
+
+      .connected-step:hover {
+        background: var(--dark);
+        border-color: var(--dark);
+        color: #f4f4f2;
+        transform: translateY(-8px);
+      }
+
+      .connected-step:focus,
+      .connected-step:focus-within {
+        background: var(--dark);
+        border-color: var(--dark);
+        color: #f4f4f2;
+        outline: 2px solid #f05a1a;
+        outline-offset: 3px;
+      }
+
+      .connected-step:hover::before,
+      .connected-step:focus::before,
+      .connected-step:focus-within::before {
+        background: #f05a1a;
+        transform: translateX(-50%) scale(1.35);
+      }
+
+      .connected-step:hover p,
+      .connected-step:focus p,
+      .connected-step:focus-within p {
+        opacity: 1;
+        transform: translateY(0);
+        color: #bdbdbd;
+      }
 
       .outcomes {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 0.9fr 1.1fr;
         gap: clamp(44px, 6vw, 90px);
         align-items: center;
       }
@@ -669,23 +1567,19 @@
 
       .outcome-core strong {
         display: block;
-        font-size: clamp(31px, 4vw, 52px);
-        line-height: 1.06;
-        letter-spacing: -0.045em;
+        font-size: clamp(34px, 4vw, 58px);
+        line-height: 1;
+        letter-spacing: -0.05em;
         font-weight: 500;
       }
 
       .outcome-core span { display: block; margin-top: 10px; color: #bdbdbd; font-size: 13px; }
       .outcome-arrow { color: var(--muted); font-size: 12px; }
 
-      .outcome-branches {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
+      .outcome-branches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
 
       .outcome-branch {
-        min-height: 118px;
+        min-height: 150px;
         border: 1px solid var(--line);
         background: var(--paper);
         padding: 16px;
@@ -695,14 +1589,22 @@
 
       .outcome-branch small { color: var(--muted); font-size: 10px; }
 
+      .trust-section { background: var(--dark); color: #f4f4f2; }
+      .trust-section .kicker,
+      .trust-section .copy,
+      .trust-section .lead { color: #bdbdbd; }
+
       .trust-layout {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: var(--section) var(--gutter);
         display: grid;
         grid-template-columns: 0.9fr 1.1fr;
         gap: clamp(44px, 8vw, 130px);
         align-items: start;
       }
 
-      .log { border: 1px solid var(--line); background: var(--surface); }
+      .log { border: 1px solid #3c3c3c; background: #202020; }
 
       .log-row {
         display: grid;
@@ -710,12 +1612,39 @@
         gap: 22px;
         align-items: start;
         padding: 28px;
-        border-bottom: 1px solid var(--line);
+        border-bottom: 1px solid #3c3c3c;
+        transition: background 450ms var(--ease), transform 450ms var(--ease);
       }
 
+      .log-row:hover { background: #292929; transform: translateX(5px); }
       .log-row:last-child { border-bottom: 0; }
       .log-row time,
-      .log-row em { color: var(--muted); font-size: 11px; font-style: normal; }
+      .log-row em { color: #9c9c9c; font-size: 11px; font-style: normal; }
+
+      .log-row.verified {
+        position: relative;
+        background: #242424;
+        padding-right: 142px;
+      }
+
+      .log-row.verified::after {
+        content: "Verified";
+        position: absolute;
+        right: 26px;
+        top: 22px;
+        width: 86px;
+        height: 86px;
+        border: 1px solid #f05a1a;
+        color: #f05a1a;
+        display: grid;
+        place-items: center;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transform: rotate(-8deg);
+        opacity: 0.9;
+      }
 
       .log-row strong {
         display: block;
@@ -726,9 +1655,149 @@
         font-weight: 500;
       }
 
-      .log-row p { margin: 0; color: var(--muted); font-size: 14px; }
+      .log-row p { margin: 0; color: #bdbdbd; font-size: 14px; }
 
-      .final { background: var(--dark); color: #f4f4f2; }
+      .trust-card-loop {
+        position: relative;
+        min-height: 620px;
+        border: 1px solid #3c3c3c;
+        background: #202020;
+        overflow: hidden;
+      }
+
+      .trust-card-loop::before {
+        content: "";
+        position: absolute;
+        inset: 28px;
+        border: 1px solid #3c3c3c;
+        opacity: 0.75;
+      }
+
+      .trust-card {
+        position: absolute;
+        left: clamp(22px, 4vw, 54px);
+        right: clamp(22px, 4vw, 54px);
+        top: clamp(34px, 4vw, 56px);
+        min-height: 68px;
+        border: 1px solid #5a5a5a;
+        background: #242424;
+        padding: 14px 16px;
+        display: grid;
+        grid-template-columns: 86px minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: center;
+        opacity: 0;
+        transform: translateY(calc(var(--stack-y) - 18px)) scale(0.98);
+        animation-duration: 17s;
+        animation-timing-function: var(--ease);
+        animation-iteration-count: infinite;
+      }
+
+      .trust-card:nth-child(1) { --stack-y: 0px; animation-name: trustCard1; }
+      .trust-card:nth-child(2) { --stack-y: 76px; animation-name: trustCard2; }
+      .trust-card:nth-child(3) { --stack-y: 152px; animation-name: trustCard3; }
+      .trust-card:nth-child(4) { --stack-y: 228px; animation-name: trustCard4; }
+      .trust-card:nth-child(5) { --stack-y: 304px; animation-name: trustCard5; }
+      .trust-card:nth-child(6) { --stack-y: 380px; animation-name: trustCard6; }
+      .trust-card:nth-child(7) { --stack-y: 456px; animation-name: trustCard7; }
+
+      .trust-card-top,
+      .trust-card-bottom {
+        display: grid;
+        gap: 5px;
+        color: #9c9c9c;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .trust-card strong {
+        display: block;
+        max-width: 430px;
+        font-size: clamp(18px, 2vw, 26px);
+        line-height: 1;
+        letter-spacing: -0.035em;
+        font-weight: 500;
+      }
+
+      .trust-card p {
+        margin: 5px 0 0;
+        max-width: 440px;
+        color: #bdbdbd;
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .trust-card.verified::after {
+        content: "Verified";
+        position: absolute;
+        right: clamp(18px, 3vw, 34px);
+        bottom: 50%;
+        width: 82px;
+        height: 82px;
+        border: 1px solid #f05a1a;
+        color: #f05a1a;
+        display: grid;
+        place-items: center;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transform: translateY(50%) rotate(-8deg) scale(0.72);
+        opacity: 0;
+        animation: trustStampCycle 17s var(--ease) infinite;
+      }
+
+      @keyframes trustCard1 {
+        0% { opacity: 0; transform: translateY(calc(var(--stack-y) - 18px)) scale(0.98); }
+        5%, 84% { opacity: 1; transform: translateY(var(--stack-y)) scale(1); }
+        100% { opacity: 0; transform: translateY(calc(var(--stack-y) + 18px)) scale(0.98); }
+      }
+
+      @keyframes trustCard2 {
+        0%, 10% { opacity: 0; transform: translateY(calc(var(--stack-y) - 18px)) scale(0.98); }
+        15%, 84% { opacity: 1; transform: translateY(var(--stack-y)) scale(1); }
+        100% { opacity: 0; transform: translateY(calc(var(--stack-y) + 18px)) scale(0.98); }
+      }
+
+      @keyframes trustCard3 {
+        0%, 20% { opacity: 0; transform: translateY(calc(var(--stack-y) - 18px)) scale(0.98); }
+        25%, 84% { opacity: 1; transform: translateY(var(--stack-y)) scale(1); }
+        100% { opacity: 0; transform: translateY(calc(var(--stack-y) + 18px)) scale(0.98); }
+      }
+
+      @keyframes trustCard4 {
+        0%, 30% { opacity: 0; transform: translateY(calc(var(--stack-y) - 18px)) scale(0.98); }
+        35%, 84% { opacity: 1; transform: translateY(var(--stack-y)) scale(1); }
+        100% { opacity: 0; transform: translateY(calc(var(--stack-y) + 18px)) scale(0.98); }
+      }
+
+      @keyframes trustCard5 {
+        0%, 40% { opacity: 0; transform: translateY(calc(var(--stack-y) - 18px)) scale(0.98); }
+        45%, 84% { opacity: 1; transform: translateY(var(--stack-y)) scale(1); }
+        100% { opacity: 0; transform: translateY(calc(var(--stack-y) + 18px)) scale(0.98); }
+      }
+
+      @keyframes trustCard6 {
+        0%, 50% { opacity: 0; transform: translateY(calc(var(--stack-y) - 18px)) scale(0.98); }
+        55%, 84% { opacity: 1; transform: translateY(var(--stack-y)) scale(1); }
+        100% { opacity: 0; transform: translateY(calc(var(--stack-y) + 18px)) scale(0.98); }
+      }
+
+      @keyframes trustCard7 {
+        0%, 60% { opacity: 0; transform: translateY(calc(var(--stack-y) - 18px)) scale(0.98); }
+        65%, 84% { opacity: 1; transform: translateY(var(--stack-y)) scale(1); }
+        100% { opacity: 0; transform: translateY(calc(var(--stack-y) + 18px)) scale(0.98); }
+      }
+
+      @keyframes trustStampCycle {
+        0%, 66% { opacity: 0; transform: translateY(50%) rotate(-8deg) scale(0.72); }
+        72%, 84% { opacity: 1; transform: translateY(50%) rotate(-8deg) scale(1); }
+        100% { opacity: 0; transform: translateY(50%) rotate(-8deg) scale(1); }
+      }
+
+      .final { background: var(--paper); }
 
       .final .section {
         padding-top: clamp(140px, 14vw, 250px);
@@ -742,19 +1811,6 @@
         align-items: end;
       }
 
-      .final .copy,
-      .final .kicker { color: #bdbdbd; }
-
-      .final .btn {
-        border: 1px solid #f4f4f2;
-        background: #f4f4f2;
-        color: #111111;
-      }
-
-      .final .btn .arrow { background: rgba(17, 17, 17, 0.1); }
-      .final .btn.secondary { border-color: rgba(244, 244, 242, 0.72); background: transparent; color: #f4f4f2; }
-      .final .btn.secondary .arrow { background: rgba(244, 244, 242, 0.16); }
-
       .footer {
         max-width: var(--max);
         margin: 0 auto;
@@ -762,7 +1818,136 @@
         display: flex;
         justify-content: space-between;
         gap: 20px;
-        color: #9c9c9c;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .site-footer {
+        background: var(--dark);
+        color: #f4f4f2;
+      }
+
+      .footer-shell {
+        max-width: var(--wide);
+        margin: 0 auto;
+        padding: clamp(70px, 8vw, 130px) var(--gutter) 36px;
+        display: grid;
+        gap: clamp(54px, 7vw, 110px);
+      }
+
+      .footer-cta {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: clamp(44px, 8vw, 130px);
+        align-items: end;
+      }
+
+      .footer-cta .kicker,
+      .footer-cta .copy { color: #bdbdbd; }
+
+      .site-footer .btn.secondary {
+        border-color: #4a4a4a;
+        color: #f4f4f2;
+      }
+
+      .site-footer .btn.secondary .arrow { background: #2b2b2b; }
+
+      .footer-main {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr 0.8fr;
+        gap: clamp(36px, 6vw, 100px);
+        border-top: 1px solid #3a3a3a;
+        padding-top: 34px;
+      }
+
+      .footer-logo {
+        color: rgba(244, 244, 242, 0.18);
+        font-size: clamp(76px, 13vw, 190px);
+        line-height: 0.82;
+        letter-spacing: -0.08em;
+        font-weight: 500;
+      }
+
+      .footer-col {
+        display: grid;
+        align-content: start;
+        gap: 16px;
+      }
+
+      .footer-col h3,
+      .newsletter h3 {
+        color: #bdbdbd;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .footer-col a {
+        color: #f4f4f2;
+        font-size: 14px;
+      }
+
+      .newsletter {
+        display: grid;
+        gap: 18px;
+      }
+
+      .newsletter-form {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        border: 1px solid #4a4a4a;
+      }
+
+      .newsletter-form input {
+        min-width: 0;
+        border: 0;
+        background: transparent;
+        color: #f4f4f2;
+        padding: 15px;
+        font: inherit;
+      }
+
+      .newsletter-form input::placeholder { color: #8f8f8f; }
+
+      .newsletter-form button {
+        border: 0;
+        border-left: 1px solid #4a4a4a;
+        background: #f05a1a;
+        color: #fff;
+        padding: 0 18px;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .socials {
+        display: flex;
+        gap: 10px;
+      }
+
+      .socials a {
+        width: 38px;
+        height: 38px;
+        border: 1px solid #4a4a4a;
+        display: grid;
+        place-items: center;
+        color: #f4f4f2;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        border-top: 1px solid #3a3a3a;
+        padding-top: 22px;
+        color: #8f8f8f;
         font-size: 12px;
       }
 
@@ -772,61 +1957,356 @@
         animation: reveal 900ms var(--ease) forwards;
       }
 
+      .photo-direction {
+        min-height: 560px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        padding: clamp(24px, 4vw, 52px);
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 32px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .photo-direction.dark {
+        border-color: var(--line);
+        background: var(--surface);
+        color: var(--ink);
+      }
+
+      .photo-direction::before {
+        content: "";
+        position: absolute;
+        inset: 22px;
+        border: 1px solid currentColor;
+        opacity: 0.12;
+        pointer-events: none;
+      }
+
+      .photo-direction::after {
+        content: "";
+        position: absolute;
+        right: -80px;
+        bottom: -80px;
+        width: 260px;
+        height: 260px;
+        background: #f05a1a;
+        opacity: 0.12;
+        filter: blur(34px);
+        pointer-events: none;
+      }
+
+      .photo-direction .caption,
+      .photo-direction .copy,
+      .photo-brief { position: relative; z-index: 1; }
+
+      .photo-brief {
+        align-self: center;
+        justify-self: center;
+        max-width: 760px;
+        color: var(--ink);
+        font-size: 24px;
+        line-height: 1.2;
+        letter-spacing: -0.025em;
+        font-weight: 400;
+        text-align: center;
+      }
+
+      .photo-direction.dark .copy,
+      .photo-direction.dark .caption { color: var(--muted); }
+
+      .simple-compare {
+        min-height: 560px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 1px solid var(--line);
+        background: var(--line);
+        gap: 1px;
+      }
+
+      .simple-compare-panel {
+        position: relative;
+        background: var(--surface);
+        overflow: hidden;
+        padding: 28px;
+      }
+
+      .simple-compare-panel.dark {
+        background: var(--dark);
+        color: #f4f4f2;
+      }
+
+      .compare-dot {
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        border: 1px solid currentColor;
+        opacity: 0.4;
+      }
+
+      .compare-dot.solid {
+        background: #f05a1a;
+        border-color: #f05a1a;
+        opacity: 1;
+      }
+
+      .compare-link {
+        position: absolute;
+        height: 2px;
+        background: #f05a1a;
+        transform-origin: left center;
+      }
+
+      .compare-caption {
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        bottom: 24px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .compare-caption strong {
+        font-size: 28px;
+        line-height: 0.96;
+        letter-spacing: -0.055em;
+        font-weight: 500;
+      }
+
+      .compare-caption span {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .simple-compare-panel.dark .compare-caption span { color: #bdbdbd; }
+
+      .simple-loop .loop-line {
+        position: absolute;
+        left: 14%;
+        right: 14%;
+        top: 48%;
+        height: 2px;
+        background: currentColor;
+        opacity: 0.2;
+      }
+
+      .simple-loop .return-line {
+        position: absolute;
+        left: 17%;
+        right: 17%;
+        top: 64%;
+        border-top: 1px dashed currentColor;
+        opacity: 0.25;
+      }
+
+      .simple-loop .loop-marker {
+        position: absolute;
+        top: calc(48% - 36px);
+        width: 72px;
+        height: 72px;
+        border: 1px solid currentColor;
+        background: var(--surface);
+        display: grid;
+        place-items: center;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .simple-loop .loop-marker.active {
+        background: #f05a1a;
+        border-color: #f05a1a;
+        color: #fff;
+      }
+
+      .passport-card.simplified {
+        width: min(700px, 100%);
+        min-height: 460px;
+        background: #191919;
+      }
+
       .d1 { animation-delay: 120ms; }
       .d2 { animation-delay: 240ms; }
       .d3 { animation-delay: 360ms; }
 
       @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
 
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
       @media (max-width: 980px) {
         .nav { top: 12px; width: calc(100% - 20px); }
         .nav-inner { grid-template-columns: 1fr auto; }
         .nav-links { display: none; }
         .hero-layout,
-        .contrast-grid,
-        .story-card,
+        .gap-grid,
+        .compare-grid,
+        .simple-compare,
+        .silo-system,
         .wide-intro,
-        .stack-grid,
+        .full-visual-copy,
+        .human-layout,
         .agent-copy,
         .agent-board,
         .outcomes,
         .trust-layout,
-        .final-grid { grid-template-columns: 1fr; }
-        .story-card { position: relative; top: auto; min-height: auto; }
-        .story-card:nth-child(2),
-        .story-card:nth-child(3) { top: auto; }
-        .hero-panel { min-height: 560px; }
+        .final-grid,
+        .footer-cta,
+        .footer-main { grid-template-columns: 1fr; }
+        .console-core { grid-template-columns: 1fr; }
+        .architecture-grid { grid-template-columns: 1fr 1fr; }
+        .operator-core { grid-template-columns: 1fr; }
+        .architecture-console { min-height: 560px; }
+        .abstract-stage { min-height: 520px; }
+        .architecture-visual { min-height: 560px; }
+        .silo-panel { min-height: 420px; }
         .proof-row,
-        .contrast-panels,
+        .compare-panels,
         .loop-strip { grid-template-columns: 1fr 1fr; }
-        .proof:nth-child(2) { border-right: 0; }
-        .proof:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
-        .stack-card.featured { min-height: 420px; }
+        .metric:nth-child(2) { border-right: 0; }
+        .metric:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
         .agent-center { min-height: 420px; }
         .outcome-branches { grid-template-columns: 1fr; }
+        .trace-rail { grid-template-columns: 1fr 1fr; }
+        .connected-loop { grid-template-columns: 1fr; gap: 12px; }
+        .connected-loop::before {
+          left: 34px;
+          right: auto;
+          top: 24px;
+          bottom: 24px;
+          width: 2px;
+          height: auto;
+          transform: none;
+        }
+        .connected-step {
+          min-height: 160px;
+          padding-left: 70px;
+        }
+        .connected-step::before {
+          left: 34px;
+          top: 50%;
+          bottom: auto;
+          transform: translate(-50%, -50%);
+        }
+        .connected-step:hover::before,
+        .connected-step:focus::before,
+        .connected-step:focus-within::before {
+          transform: translate(-50%, -50%) scale(1.35);
+        }
+        .connected-step p {
+          opacity: 1;
+          transform: none;
+        }
+        .flight-object { min-height: auto; }
+        .flight-sequence { grid-template-columns: 1fr; }
+        .flight-sequence::before {
+          left: 50%;
+          right: auto;
+          top: 40px;
+          bottom: 40px;
+          width: 1px;
+          height: auto;
+        }
+        .flight-hub { min-height: 340px; box-shadow: none; }
+        .value-map {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+          min-height: auto;
+        }
+        .value-core,
+        .value-box.pricing,
+        .value-box.marketing,
+        .value-box.customer,
+        .value-box.operations,
+        .value-box.finance {
+          grid-column: auto;
+          grid-row: auto;
+        }
+        .value-core { grid-column: 1 / -1; min-height: 170px; }
         .footer { flex-direction: column; }
       }
 
       @media (max-width: 620px) {
-        .section { padding-left: 18px; padding-right: 18px; }
-        .mega { font-size: clamp(42px, 14vw, 78px); }
-        h2 { font-size: clamp(31px, 11vw, 52px); }
+        .section,
+        .compare-grid,
+        .trust-layout { padding-left: 18px; padding-right: 18px; }
+        .mega { font-size: clamp(45px, 14vw, 76px); }
+        h2 { font-size: clamp(34px, 11vw, 56px); }
         .nav-action .btn { min-height: 34px; padding-left: 12px; }
         .nav-action .btn span:first-child { display: none; }
         .proof-row,
-        .contrast-panels,
-        .loop-strip { grid-template-columns: 1fr; }
-        .proof { border-right: 0; border-bottom: 1px solid var(--line); }
-        .proof:last-child { border-bottom: 0; }
-        .image-title { display: grid; }
-        .hero-panel { min-height: 500px; }
-        .decision-surface { inset: 78px 24px 94px; }
-        .micro-node { min-width: 110px; }
-        .mn1, .mn3 { left: 10px; }
-        .mn2, .mn4 { right: 10px; }
-        .stack-card { min-height: 300px; }
+        .compare-panels,
+        .loop-strip,
+        .trace-rail,
+        .simple-compare,
+        .architecture-grid,
+        .operator-note { grid-template-columns: 1fr; }
+        .metric { border-right: 0; border-bottom: 1px solid var(--line); }
+        .metric:last-child { border-bottom: 0; }
+        .architecture-console { min-height: 500px; }
+        .abstract-stage { min-height: 430px; }
+        .architecture-visual { min-height: 500px; }
+        .visual-label { display: grid; left: 18px; right: 18px; bottom: 18px; }
+        .visual-label strong { font-size: 24px; }
+        .expansion-field .proof-node { width: 150px; height: 150px; }
+        .expansion-field .proof-node strong { font-size: 23px; }
+        .expansion-field .market-node {
+          min-width: 92px;
+          min-height: 58px;
+          padding: 10px;
+          font-size: 8px;
+        }
+        .silo-panel { min-height: 360px; }
+        .closed-loop .loop-node { width: 74px; height: 74px; font-size: 9px; }
+        .passport-stamps { grid-template-columns: 1fr 1fr; }
+        .architecture-step { min-height: 230px; }
         .agent-center { min-height: 360px; }
         .log-row { grid-template-columns: 1fr; }
+        .log-row.verified { padding-right: 28px; padding-bottom: 122px; }
+        .log-row.verified::after { left: 28px; right: auto; top: auto; bottom: 24px; }
+        .trust-card-loop { min-height: 540px; }
+        .trust-card {
+          left: 18px;
+          right: 18px;
+          min-height: 62px;
+          grid-template-columns: 62px minmax(0, 1fr);
+          gap: 12px;
+          padding: 12px;
+        }
+        .trust-card p { display: none; }
+        .trust-card strong { font-size: 17px; }
+        .trust-card-top,
+        .trust-card-bottom {
+          display: grid;
+          gap: 8px;
+        }
+        .trust-card-bottom { display: none; }
+        .trust-card.verified::after {
+          right: 14px;
+          bottom: 50%;
+          width: 70px;
+          height: 70px;
+        }
+        .value-map { grid-template-columns: 1fr; }
+        .value-core { grid-column: auto; }
+        .footer-shell { padding-left: 18px; padding-right: 18px; }
+        .footer-logo { font-size: clamp(58px, 21vw, 118px); }
+        .footer-bottom { flex-direction: column; }
+        .newsletter-form { grid-template-columns: 1fr; }
+        .newsletter-form button {
+          min-height: 46px;
+          border-left: 0;
+          border-top: 1px solid #4a4a4a;
+        }
       }
     </style>
   </head>
@@ -839,9 +2319,9 @@
             <span>Providio</span>
           </a>
           <div class="nav-links">
-            <a href="#wrong-layer">AI layer</a>
-            <a href="#drag">Decision drag</a>
-            <a href="#context">Context</a>
+            <a href="#gap">Action gap</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#operators">Operators</a>
             <a href="#agent">Flight agent</a>
             <a href="#trust">Trust</a>
           </div>
@@ -852,142 +2332,106 @@
       </nav>
 
       <header id="top" class="section first">
-        <div class="hero-layout">
+        <div class="hero-layout centered">
           <div class="hero-copy reveal">
-            <p class="kicker">AI-native system of action</p>
-            <h1 class="mega">Coordinate the decisions behind revenue.</h1>
-            <p class="lead">Providio helps airlines turn demand, pricing, marketing, and finance signals into governed action before the window closes.</p>
+            <p class="kicker">AI-native System of Action</p>
+            <h1 class="mega">Stop syncing. Start executing.</h1>
+            <p class="lead">Providio learns your decision logic, unifies live signals, and executes governed P&amp;L actions across teams.</p>
             <div class="hero-actions">
               <a class="btn" href="#contact"><span>Talk to us</span><span class="arrow">→</span></a>
-              <a class="btn secondary" href="#agent"><span>See the system</span><span class="arrow">↓</span></a>
+              <a class="btn secondary" href="#architecture"><span>See the architecture</span><span class="arrow">↓</span></a>
             </div>
           </div>
-          <aside class="reveal d2">
-            <div class="hero-panel" aria-label="Hero visual placeholder: decision system">
-              <div class="panel-label"><span>Outcome execution</span><span>Wireframe visual</span></div>
-              <div class="decision-surface">
-              <div class="surface-title">
-                  <div><strong>One decision surface.</strong><span>signals / rules / teams / action / trace</span></div>
-                </div>
-              </div>
-              <div class="micro-node mn1"><small>Signal</small>Market shift</div>
-              <div class="micro-node mn2"><small>Policy</small>Guardrail</div>
-              <div class="micro-node mn3"><small>Team</small>Revenue</div>
-              <div class="micro-node mn4"><small>Action</small>Queued</div>
-              <div class="micro-node mn5"><small>Trace</small>Captured</div>
-            </div>
-          </aside>
         </div>
       </header>
 
       <section class="proof-section reveal d3" aria-label="Proof points">
         <div class="proof-row">
-          <div class="proof"><strong>30-90d</strong><span>pilot path to value</span></div>
-          <div class="proof"><strong>96h+</strong><span>decision latency to compress</span></div>
-          <div class="proof"><strong>630k+</strong><span>daily airline signals</span></div>
-          <div class="proof"><strong>1st</strong><span>outcome: revenue capture</span></div>
+          <div class="metric"><strong>30-90d</strong><span>path to proof</span></div>
+          <div class="metric"><strong>96h+</strong><span>latency to compress</span></div>
+          <div class="metric"><strong>630k+</strong><span>signals to synthesize</span></div>
+          <div class="metric"><strong>1st</strong><span>revenue capture wedge</span></div>
         </div>
       </section>
 
-      <section id="wrong-layer" class="contrast-section">
-        <div class="section contrast-grid">
+      <section id="gap" class="gap-section">
+        <div class="section gap-grid">
           <div class="reveal">
-            <p class="kicker">The wrong layer</p>
-            <h2>AI made the work faster. The decision still waits.</h2>
-            <p class="copy">Most AI tools help one person or one team move faster. Providio helps decisions move across teams.</p>
+            <p class="kicker">The execution ceiling</p>
+            <h2>You know what to do. The business cannot move fast enough.</h2>
+            <p class="copy">Airlines have the data, talent, and intent. Value gets trapped when decisions depend on manual alignment across fragmented teams and systems.</p>
           </div>
-          <div class="contrast-panels reveal d2" aria-label="Copilots versus Providio visual">
-            <div class="contrast-card">
-              <div>
-                <p class="caption">Task acceleration</p>
-                <h3>Teams move faster.</h3>
-              </div>
-              <div class="visual-lines"><span></span><span></span><span></span></div>
-              <p class="copy">More output, same handoffs, same alignment delays.</p>
+          <div class="photo-direction reveal d2" aria-label="Photo direction for execution ceiling section">
+            <p class="caption">Generated image direction</p>
+            <div class="photo-brief">Aviation operations control room, late evening, focused operators, fragmented screens, monochrome warm gray treatment, one subtle orange execution marker.</div>
+            <p class="copy">Use this image to make the execution ceiling feel real: high-stakes operations, many signals, and the pressure of acting before the market moves.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="compare-section">
+        <div class="compare-grid">
+          <div class="reveal">
+            <p class="kicker">Beyond the copilot</p>
+            <h2>Copilots advise. Providio executes.</h2>
+            <p class="copy">Generic AI speeds up individual silos. Providio learns how the business makes money, respects policy, and turns coordinated decisions into executed work.</p>
+          </div>
+          <div class="simple-compare reveal d2" aria-label="Simplified abstract visual: copilots versus Providio">
+            <div class="simple-compare-panel">
+              <p class="caption">Copilots</p>
+              <span class="compare-dot" style="left: 18%; top: 25%;"></span>
+              <span class="compare-dot" style="right: 18%; top: 25%;"></span>
+              <span class="compare-dot" style="left: 18%; bottom: 30%;"></span>
+              <span class="compare-dot" style="right: 18%; bottom: 30%;"></span>
+              <div class="compare-caption"><strong>Separate boosts.</strong><span>Each silo moves faster, but the outcome still depends on handoffs.</span></div>
             </div>
-            <div class="contrast-card dark">
-              <div>
-                <p class="caption">Outcome execution</p>
-                <h3>Decisions move across teams.</h3>
-              </div>
-              <div class="visual-lines"><span></span><span></span><span></span></div>
-              <p class="copy">Shared context, governed action, and a trace for every recommendation.</p>
+            <div class="simple-compare-panel dark">
+              <p class="caption">Providio</p>
+              <span class="compare-link" style="left: 22%; top: 38%; width: 56%;"></span>
+              <span class="compare-link" style="left: 22%; top: 54%; width: 56%;"></span>
+              <span class="compare-link" style="left: 50%; top: 30%; width: 2px; height: 34%;"></span>
+              <span class="compare-dot" style="left: 18%; top: 30%;"></span>
+              <span class="compare-dot" style="right: 18%; top: 30%;"></span>
+              <span class="compare-dot" style="left: 18%; bottom: 28%;"></span>
+              <span class="compare-dot solid" style="right: 18%; bottom: 28%;"></span>
+              <div class="compare-caption"><strong>Coordinated action.</strong><span>Shared reasoning turns fragmented work into one executable path.</span></div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="drag" class="story-band">
-        <div class="story-inner">
-          <div class="story-intro reveal">
-            <div>
-              <p class="kicker">Decision drag</p>
-              <h2>The delay is between teams.</h2>
-              <p class="copy">By the time pricing, marketing, finance, and operations align, the market has already moved.</p>
-            </div>
-          </div>
-
-          <div class="story-stack">
-            <article class="story-card reveal d1">
-              <div class="card-copy">
-                <p class="caption">01 / Coordination tax</p>
-                <h3>Everyone is right locally. The business is late globally.</h3>
-                <p class="copy">Each team optimizes its own KPI. Providio coordinates the shared outcome.</p>
-              </div>
-              <div class="image-block" aria-label="Visual placeholder: fragmented departments">
-                <div class="image-title"><strong>Five teams. One outcome. No shared decision surface.</strong><span>Visual: handoffs, local KPIs, and P&amp;L leakage.</span></div>
-              </div>
-            </article>
-
-            <article class="story-card reveal d2">
-              <div class="card-copy">
-                <p class="caption">02 / Human middleware</p>
-                <h3>Your operators are still stitching decisions together.</h3>
-                <p class="copy">They should be judging tradeoffs, not reconciling spreadsheets and chasing context.</p>
-                <blockquote class="big-quote">“Organic API”</blockquote>
-              </div>
-              <div class="image-block dark" aria-label="Visual placeholder: operator workflow">
-                <div class="image-title"><strong>From manual bridge to strategic operator.</strong><span>Visual: before/after operator workflow.</span></div>
-              </div>
-            </article>
-
-            <article class="story-card reveal d3">
-              <div class="card-copy">
-                <p class="caption">03 / Missing layer</p>
-                <h3>Teams need shared business context.</h3>
-                <p class="copy">The rules, thresholds, tradeoffs, and approvals that define how decisions actually get made.</p>
-              </div>
-              <div class="image-block" aria-label="Visual placeholder: context layer">
-                <div class="image-title"><strong>Signals become decisions when context binds them.</strong><span>Visual: shared rules, tradeoffs, approvals, and actions.</span></div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="context" class="system-section">
+      <section id="architecture" class="architecture-section">
         <div class="section">
           <div class="wide-intro reveal">
             <div>
-              <p class="kicker">Providio context stack</p>
-              <h2>Providio captures how decisions actually get made.</h2>
+              <p class="kicker">Architecture of action</p>
+              <h2>The operating layer for high-stakes decisions.</h2>
             </div>
-            <p class="copy">We encode goals, constraints, approval paths, and real decision scenarios, then use them to train agents that act inside your guardrails.</p>
+            <p class="copy">Providio captures your institutional playbook, trains agents on business context, and executes only inside verified guardrails.</p>
           </div>
+          <div class="architecture-grid reveal d2" aria-label="Architecture of action flow">
+            <div class="architecture-step"><span>01</span><div><h3>Learn the logic</h3><p>Capture goals, constraints, policies, thresholds, and approval paths.</p></div></div>
+            <div class="architecture-step"><span>02</span><div><h3>Model the decisions</h3><p>Turn real operating moments into scenarios agents can reason from.</p></div></div>
+            <div class="architecture-step"><span>03</span><div><h3>Tune the agents</h3><p>Train specialized models on your business logic, not generic instructions.</p></div></div>
+            <div class="architecture-step"><span>04</span><div><h3>Execute with control</h3><p>Prepare actions, route approvals, and write only where permission exists.</p></div></div>
+            <div class="architecture-step"><span>05</span><div><h3>Prove the outcome</h3><p>Log the trigger, rules, action, owner, and measurable result.</p></div></div>
+            <div class="architecture-step"><span>06</span><div><h3>Scale the system</h3><p>Every verified result strengthens the next decision flow.</p></div></div>
+          </div>
+        </div>
+      </section>
 
-          <div class="stack-grid reveal d2" aria-label="Context stack cards">
-            <div class="stack-card">
-              <div><p class="caption">Layer 01</p><strong>Capture decision rules</strong><p>Goals, constraints, approval thresholds, and stakeholder priorities.</p></div>
-              <div class="mini-diagram"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
-            </div>
-            <div class="stack-card featured">
-              <div><p class="caption">Layer 02</p><strong>Generate scenarios</strong><p>Thousands of decision examples from real operational snapshots.</p></div>
-              <div class="mini-diagram"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
-            </div>
-            <div class="stack-card">
-              <div><p class="caption">Layer 03</p><strong>Train agents</strong><p>Small models learn how your business weighs revenue, capacity, risk, and margin.</p></div>
-              <div class="mini-diagram"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
-            </div>
+      <section id="operators" class="human-section">
+        <div class="section human-layout">
+          <div class="reveal">
+            <p class="kicker">Augmented, not replaced</p>
+            <h2>Give operators back the work they were hired for.</h2>
+            <p class="lead">Providio removes the manual synthesis. Humans keep the judgment.</p>
+            <p class="copy">Your best people stop acting as the integration layer between broken systems. They set intent, handle exceptions, and steer outcomes.</p>
+          </div>
+          <div class="photo-direction reveal d2" aria-label="Photo direction for human augmentation section">
+            <p class="caption">Generated image direction</p>
+            <div class="photo-brief">Focused commercial operator at a workstation, hands near keyboard, multiple blurred operational screens, calm concentration, warm gray monochrome, subtle orange approval marker.</div>
+            <p class="copy">Use this image to add the human layer: not a smiling SaaS user, but a capable operator with judgment, control, and expanded reach.</p>
           </div>
         </div>
       </section>
@@ -997,28 +2441,33 @@
           <div class="agent-copy reveal">
             <div>
               <p class="kicker">Signature product idea</p>
-              <h2>A flight becomes a decision agent.</h2>
+              <h2>A flight stops being a row. It becomes an agent.</h2>
             </div>
             <div>
-              <p class="lead">A flight is no longer a row in a dashboard. It becomes a live decision surface.</p>
-              <p class="copy">Each flight reads the signals around it, weighs the tradeoffs, and prepares the next best action.</p>
+              <p class="lead">Each flight carries its own commercial context, constraints, and next-best action.</p>
+              <p class="copy">It reads demand, inventory, pricing, finance, and policy signals, then prepares the action the business can safely execute.</p>
             </div>
           </div>
 
-          <div class="agent-board reveal d2" aria-label="Flight-as-an-AI-Agent visual placeholder">
-            <div class="flow-column">
-              <div class="flow-title">Signals in</div>
-              <div class="flow-item"><small>Demand</small>Search volume rising</div>
-              <div class="flow-item"><small>Supply</small>Inventory pressure</div>
-              <div class="flow-item"><small>Pricing</small>Fare boundary active</div>
-              <div class="flow-item"><small>Finance</small>Margin threshold</div>
-            </div>
-            <div class="agent-center"><div><strong>Flight 4821</strong><span>JFK to LAX / departure in 42h</span><span>Agents reason with the business context around this flight.</span></div></div>
-            <div class="flow-column">
-              <div class="flow-title">Action out</div>
-              <div class="decision-ticket"><strong>Action prepared</strong><span>Adjust fare boundary and coordinate targeted demand.</span></div>
-              <div class="flow-item"><small>Approval</small>Human review if policy requires it</div>
-              <div class="flow-item"><small>Trace</small>Signals, constraints, and outcome captured</div>
+          <div class="flight-object reveal d2" aria-label="Flight as a decision object visual">
+            <div class="flight-sequence">
+              <div class="flight-inputs" aria-label="Live flight inputs">
+                <div class="signal-card"><span>Demand</span><strong>Late search spike</strong></div>
+                <div class="signal-card"><span>Inventory</span><strong>Seats left by fare</strong></div>
+                <div class="signal-card"><span>Finance</span><strong>Margin threshold</strong></div>
+                <div class="signal-card"><span>Policy</span><strong>Guardrail active</strong></div>
+              </div>
+              <div class="flight-hub">
+                <div><span>Decision object</span><em>42h to departure</em></div>
+                <div><strong>Flight 4821</strong><p>One flight gathers live signals, business rules, and commercial context before any action is prepared.</p></div>
+                <div><span>JFK to LAX</span><em>Trace ready</em></div>
+              </div>
+              <div class="flight-outputs" aria-label="Governed flight actions">
+                <div class="action-card"><span>Reason</span><strong>Tradeoff resolved</strong></div>
+                <div class="action-card"><span>Approval</span><strong>Human path routed</strong></div>
+                <div class="action-card ready"><span>Action</span><strong>Price move ready</strong></div>
+                <div class="action-card"><span>Trace</span><strong>Decision recorded</strong></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1027,82 +2476,109 @@
       <section class="section">
         <div class="wide-intro reveal">
           <div>
-            <p class="kicker">Governed execution loop</p>
-            <h2>From signal to action in one loop.</h2>
-          </div>
-          <p class="copy">Providio learns the rules, reads the signals, reasons through tradeoffs, executes with approval, and records the trace.</p>
+              <p class="kicker">Governed execution loop</p>
+              <h2>Learn. See. Reason. Act. Trust.</h2>
+            </div>
+          <p class="copy">Providio turns strategy into a repeatable operating loop. Every action is governed, measured, and used to improve the next decision.</p>
         </div>
-        <div class="loop-strip reveal d2" aria-label="Learn See Reason Act Trust loop">
-          <div class="loop-step"><span>01</span><div><h3>Learn</h3><p>Capture the goals, rules, and approval paths.</p></div></div>
-          <div class="loop-step"><span>02</span><div><h3>See</h3><p>Read the live signals across teams and systems.</p></div></div>
-          <div class="loop-step"><span>03</span><div><h3>Reason</h3><p>Weigh tradeoffs across revenue, demand, and capacity.</p></div></div>
-          <div class="loop-step"><span>04</span><div><h3>Act</h3><p>Prepare or execute the governed playbook.</p></div></div>
-          <div class="loop-step"><span>05</span><div><h3>Trust</h3><p>Record the trigger, rules, approval, and result.</p></div></div>
+        <div class="connected-loop reveal d2" aria-label="Learn See Reason Act Trust connected loop">
+          <div class="connected-step" tabindex="0"><span>01</span><strong>Learn</strong><p>Encode the goals, rules, constraints, and approvals.</p></div>
+          <div class="connected-step" tabindex="0"><span>02</span><strong>See</strong><p>Fuse live signals across teams and systems.</p></div>
+          <div class="connected-step" tabindex="0"><span>03</span><strong>Reason</strong><p>Resolve tradeoffs across revenue, demand, risk, and capacity.</p></div>
+          <div class="connected-step" tabindex="0"><span>04</span><strong>Act</strong><p>Write the governed action into the right system.</p></div>
+          <div class="connected-step" tabindex="0"><span>05</span><strong>Trust</strong><p>Record the why, who, rule, approval, and result.</p></div>
         </div>
       </section>
 
       <section class="section">
         <div class="outcomes">
           <div class="reveal">
-            <p class="kicker">Outcome expansion</p>
-            <h2>The first outcome teaches the next one.</h2>
-            <p class="lead">Revenue capture proves the system.</p>
-            <p class="copy">The same context layer then expands into pricing, marketing, customer intelligence, operations, and finance.</p>
+            <p class="kicker">Continuous value capture</p>
+            <h2>Prove one decision. Then expand the system.</h2>
+            <p class="lead">Revenue capture is the wedge. Architecture is the moat.</p>
+            <p class="copy">Once Providio learns one high-value flow, the same logic can scale across pricing, marketing, customer intelligence, operations, and finance.</p>
           </div>
-          <div class="outcome-visual reveal d2" aria-label="Outcome expansion visual placeholder">
-            <div class="outcome-flow">
-              <div class="outcome-core"><strong>Revenue Capture</strong><span>First outcome. First proof of value.</span></div>
-              <div class="outcome-arrow">Shared context layer expands into</div>
-              <div class="outcome-branches">
-                <div class="outcome-branch"><small>Outcome 02</small><strong>Dynamic Pricing</strong></div>
-                <div class="outcome-branch"><small>Outcome 03</small><strong>Marketing Optimization</strong></div>
-                <div class="outcome-branch"><small>Outcome 04</small><strong>Customer Intelligence</strong></div>
-                <div class="outcome-branch"><small>Outcome 05</small><strong>Operations Alignment</strong></div>
-              </div>
-              <div class="outcome-core"><strong>Same context. More outcomes.</strong><span>Every captured decision strengthens the next deployment.</span></div>
-            </div>
+          <div class="abstract-stage light expansion-field reveal d2" aria-label="Abstract visual: one proof expands across outcomes">
+            <span class="ripple" style="width: 280px; height: 280px; --o: .35;"></span>
+            <span class="ripple" style="width: 440px; height: 440px; --o: .22;"></span>
+            <span class="ripple" style="width: 610px; height: 610px; --o: .12;"></span>
+            <div class="proof-node"><strong>Revenue Capture</strong></div>
+            <span class="market-node" style="left: 12%; top: 18%;">Pricing</span>
+            <span class="market-node" style="right: 16%; top: 20%;">Marketing</span>
+            <span class="market-node" style="left: 13%; bottom: 22%;">Customer Intelligence</span>
+            <span class="market-node" style="right: 30%; bottom: 15%;">Operations</span>
+            <span class="market-node" style="right: 12%; bottom: 29%;">Finance</span>
+            <span class="action-dot" style="left: 50%; top: 48%; transform: translate(-50%, -50%);"></span>
+            <div class="visual-label"><strong>One verified flow expands the system.</strong><span>Revenue capture proves the architecture, then new outcomes attach to the same logic.</span></div>
           </div>
         </div>
       </section>
 
-      <section id="trust" class="section">
+      <section id="trust" class="trust-section">
         <div class="trust-layout">
           <div class="reveal">
             <p class="kicker">Trust architecture</p>
-            <h2>Autonomy earns its permissions.</h2>
-            <p class="lead">Providio does not ask the enterprise to trust a black box.</p>
-            <p class="copy">Every recommendation shows what triggered it, which rules shaped it, who approved it, and what happened next.</p>
+            <h2>Speed without safety is a liability.</h2>
+            <p class="lead">Providio earns the right to automate.</p>
+            <p class="copy">Every action is constrained by policy, routed through approval when needed, and logged with the trigger, rule, owner, and outcome.</p>
           </div>
-          <div class="log reveal d2" aria-label="Decision trace visual placeholder">
-            <div class="log-row"><time>08:14</time><div><strong>Signal detected</strong><p>Demand moved before the reporting cycle caught it.</p></div><em>Signal</em></div>
-            <div class="log-row"><time>08:15</time><div><strong>Scenario matched</strong><p>The system found a similar decision pattern.</p></div><em>Context</em></div>
-            <div class="log-row"><time>08:16</time><div><strong>Guardrails checked</strong><p>Pricing, finance, and policy rules validated.</p></div><em>Control</em></div>
-            <div class="log-row"><time>08:18</time><div><strong>Action queued</strong><p>Recommendation sent for review with full trace.</p></div><em>HITL</em></div>
-            <div class="log-row"><time>08:21</time><div><strong>Outcome captured</strong><p>Result feeds the next scenario set.</p></div><em>Learn</em></div>
+          <div class="trust-card-loop reveal d2" aria-label="Animated decision trace cards">
+            <div class="trust-card"><div class="trust-card-top"><span>08:14</span><span>Signal</span></div><div><strong>Signal detected</strong><p>Demand moved before the reporting cycle caught it.</p></div><div class="trust-card-bottom"><span>Trigger recorded</span><span>Live context</span></div></div>
+            <div class="trust-card"><div class="trust-card-top"><span>08:15</span><span>Context</span></div><div><strong>Scenario matched</strong><p>A similar decision pattern was found in context.</p></div><div class="trust-card-bottom"><span>Pattern matched</span><span>Decision logic</span></div></div>
+            <div class="trust-card"><div class="trust-card-top"><span>08:16</span><span>Control</span></div><div><strong>Guardrails checked</strong><p>Pricing, finance, and policy constraints passed.</p></div><div class="trust-card-bottom"><span>Rules checked</span><span>Safe to route</span></div></div>
+            <div class="trust-card"><div class="trust-card-top"><span>08:17</span><span>Approval</span></div><div><strong>Approval routed</strong><p>The action moved through the required human path.</p></div><div class="trust-card-bottom"><span>Owner assigned</span><span>HITL path</span></div></div>
+            <div class="trust-card"><div class="trust-card-top"><span>08:18</span><span>Action</span></div><div><strong>Action executed</strong><p>The governed recommendation was written to the right system.</p></div><div class="trust-card-bottom"><span>Write permitted</span><span>System updated</span></div></div>
+            <div class="trust-card"><div class="trust-card-top"><span>08:21</span><span>Outcome</span></div><div><strong>Outcome captured</strong><p>The result now strengthens the next decision.</p></div><div class="trust-card-bottom"><span>Result measured</span><span>Loop learning</span></div></div>
+            <div class="trust-card verified"><div class="trust-card-top"><span>08:22</span><span>Verified</span></div><div><strong>Decision verified</strong><p>Trigger, rule, approval, action, and result became an auditable artifact.</p></div><div class="trust-card-bottom"><span>Audit-ready</span><span>Safe to scale</span></div></div>
           </div>
         </div>
       </section>
 
-      <section id="contact" class="final">
-        <div class="section">
-          <div class="final-grid reveal">
+      <section id="contact" class="site-footer">
+        <div class="footer-shell">
+          <div class="footer-cta reveal">
             <div>
               <p class="kicker">Design partner conversations open</p>
-              <h2>If this drag feels familiar, map one decision.</h2>
+              <h2>Map one decision. Execute the proof.</h2>
             </div>
             <div>
-              <p class="copy">We work with a small number of airline and mobility operators to encode one high-value decision flow and prove value fast.</p>
+              <p class="copy">We work with a small number of airline and mobility operators to encode one high-value decision flow and turn it into measurable action.</p>
               <div class="hero-actions" style="margin-top: 30px">
-                <a class="btn" href="mailto:hello@providio.ai"><span>Start a conversation</span><span class="arrow">→</span></a>
+                <a class="btn" href="mailto:hello@providio.ai"><span>Map a decision</span><span class="arrow">→</span></a>
                 <a class="btn secondary" href="#top"><span>Back to top</span><span class="arrow">↑</span></a>
               </div>
             </div>
           </div>
+
+          <div class="footer-main">
+            <div class="footer-logo">Providio</div>
+            <div class="footer-col">
+              <h3>Sections</h3>
+              <a href="#gap">Execution ceiling</a>
+              <a href="#architecture">Architecture</a>
+              <a href="#operators">Operators</a>
+              <a href="#agent">Flight agent</a>
+              <a href="#trust">Trust</a>
+            </div>
+            <div class="newsletter">
+              <h3>Newsletter</h3>
+              <p class="copy">Updates on AI-native systems of action and commercial execution.</p>
+              <form class="newsletter-form">
+                <input type="email" placeholder="Email address" aria-label="Email address" />
+                <button type="button">Join</button>
+              </form>
+              <div class="socials" aria-label="Social links">
+                <a href="#" aria-label="X profile">X</a>
+                <a href="#" aria-label="LinkedIn profile">in</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <span>Providio AI</span>
+            <span>Wireframe v7. Footer, flight object, restored architecture cards.</span>
+          </div>
         </div>
-        <footer class="footer">
-          <span>Providio AI</span>
-          <span>Wireframe v4. Same typography and color system. Sharper story flow.</span>
-        </footer>
       </section>
     </div>
   </body>
