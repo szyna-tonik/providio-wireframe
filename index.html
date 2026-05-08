@@ -218,8 +218,37 @@
         align-items: end;
       }
 
-      .hero-copy { display: grid; gap: 34px; }
+      .hero-copy { display: grid; gap: 28px; }
       .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+      .hero-logo-strip {
+        width: min(760px, 100%);
+        display: grid;
+        gap: 12px;
+        color: var(--muted);
+      }
+
+      .hero-logo-strip .caption { font-size: 10px; }
+
+      .hero-logos {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        border: 1px solid var(--line);
+        background: var(--line);
+        gap: 1px;
+      }
+
+      .hero-logos span {
+        min-height: 44px;
+        background: rgba(255, 255, 255, 0.45);
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
 
       .hero-layout.centered {
         min-height: clamp(380px, 48vh, 560px);
@@ -2243,6 +2272,8 @@
         h2 { font-size: clamp(34px, 11vw, 56px); }
         .nav-action .btn { min-height: 34px; padding-left: 12px; }
         .nav-action .btn span:first-child { display: none; }
+        .hero-logos { grid-template-columns: repeat(2, 1fr); }
+        .hero-logos span { min-height: 38px; }
         .proof-row,
         .compare-panels,
         .loop-strip,
@@ -2340,6 +2371,17 @@
             <div class="hero-actions">
               <a class="btn" href="#contact"><span>Talk to us</span><span class="arrow">→</span></a>
               <a class="btn secondary" href="#architecture"><span>See the architecture</span><span class="arrow">↓</span></a>
+            </div>
+            <div class="hero-logo-strip" aria-label="Example operator logos">
+              <p class="caption">Built for high-stakes operators across aviation and mobility</p>
+              <div class="hero-logos">
+                <span>AeroNorth</span>
+                <span>Skyline</span>
+                <span>JetGrid</span>
+                <span>RouteIQ</span>
+                <span>FareOps</span>
+                <span>Liftline</span>
+              </div>
             </div>
           </div>
         </div>
