@@ -240,6 +240,12 @@
 
       .hero-logo-strip .caption { font-size: 10px; }
 
+      .hero-bottom-strip {
+        width: min(920px, 100%);
+        margin: clamp(42px, 5vw, 72px) auto 0;
+        text-align: center;
+      }
+
       .hero-logos {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
@@ -3735,6 +3741,17 @@
             </div>
           </div>
         </div>
+        <div class="hero-logo-strip hero-bottom-strip reveal d3" aria-label="Commercial execution areas">
+          <p class="caption">Designed to connect commercial execution across</p>
+          <div class="hero-logos">
+            <span>Logo 1</span>
+            <span>Logo 2</span>
+            <span>Logo 3</span>
+            <span>Logo 4</span>
+            <span>Logo 5</span>
+            <span>Logo 6</span>
+          </div>
+        </div>
       </header>
 
       <section class="architecture-preview" aria-label="Architecture preview">
@@ -3758,20 +3775,6 @@
               <div class="architecture-connector c4" aria-hidden="true"></div>
               <div class="architecture-node"><span>05 Trust</span><strong>Guardrailed Execution</strong><p>Writes decisions within policy, HITL exceptions, and audit logs.</p></div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="logo-strip-section" aria-label="Commercial execution areas">
-        <div class="hero-logo-strip reveal">
-          <p class="caption">Designed to connect commercial execution across</p>
-          <div class="hero-logos">
-            <span>Revenue</span>
-            <span>Pricing</span>
-            <span>Marketing</span>
-            <span>Finance</span>
-            <span>Inventory</span>
-            <span>Systems of record</span>
           </div>
         </div>
       </section>
