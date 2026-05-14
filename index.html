@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Providio Landing Wireframe V10</title>
+    <title>Providio Landing Wireframe V13</title>
     <style>
       :root {
         --ink: #101010;
@@ -631,6 +631,581 @@
         0% { transform: translateX(0); opacity: 0; }
         15%, 82% { opacity: 1; }
         100% { transform: translateX(40px); opacity: 0; }
+      }
+
+      .product-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(520px, 1.1fr);
+        gap: clamp(46px, 6vw, 110px);
+        align-items: center;
+        text-align: left;
+      }
+
+      .product-hero .hero-copy { justify-items: start; }
+      .product-hero .mega,
+      .product-hero .lead { margin-left: 0; margin-right: 0; }
+
+      .hero-system-panel {
+        position: relative;
+        min-height: 620px;
+        border: 1px solid var(--ink);
+        background: var(--dark);
+        color: #f4f4f2;
+        overflow: hidden;
+      }
+
+      .hero-system-panel::before {
+        content: "";
+        position: absolute;
+        left: 12%;
+        right: 12%;
+        top: 50%;
+        height: 1px;
+        background: rgba(244,244,242,0.28);
+      }
+
+      .hero-system-panel::after {
+        content: "";
+        position: absolute;
+        left: 12%;
+        top: calc(50% - 3px);
+        width: 7px;
+        height: 7px;
+        background: #f05a1a;
+        animation: heroSignal 5.4s linear infinite;
+      }
+
+      @keyframes heroSignal {
+        0% { transform: translateX(0); opacity: 0; }
+        12%, 84% { opacity: 1; }
+        100% { transform: translateX(560px); opacity: 0; }
+      }
+
+      .system-node {
+        position: absolute;
+        z-index: 2;
+        width: 112px;
+        height: 112px;
+        border: 1px solid rgba(244,244,242,0.3);
+        background: #202020;
+        display: grid;
+        place-items: center;
+        color: #bdbdbd;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .system-node.core {
+        left: 50%;
+        top: 50%;
+        width: 172px;
+        height: 172px;
+        transform: translate(-50%, -50%);
+        border-color: #f05a1a;
+        color: #f4f4f2;
+        font-size: 10px;
+      }
+
+      .system-node.signals { left: 8%; top: 22%; }
+      .system-node.agents { right: 18%; top: 22%; }
+      .system-node.products { right: 8%; bottom: 20%; }
+      .system-node.action { left: 14%; bottom: 18%; }
+
+      .system-node.core::before,
+      .system-node.core::after {
+        content: "";
+        position: absolute;
+        border: 1px solid rgba(244,244,242,0.16);
+      }
+
+      .system-node.core::before { inset: 18px; }
+      .system-node.core::after { inset: 44px; border-color: rgba(240,90,26,0.42); }
+
+      .mini-video-card {
+        position: absolute;
+        z-index: 3;
+        right: 24px;
+        bottom: 24px;
+        width: min(280px, calc(100% - 48px));
+        min-height: 156px;
+        border: 1px solid rgba(244,244,242,0.28);
+        background: #efeee8;
+        color: var(--ink);
+        padding: 14px;
+        display: grid;
+        align-content: space-between;
+        gap: 18px;
+      }
+
+      .mini-video-card span {
+        color: var(--muted);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .mini-video-card strong {
+        max-width: 190px;
+        font-size: 22px;
+        line-height: 0.98;
+        letter-spacing: -0.04em;
+        font-weight: 500;
+      }
+
+      .play-dot {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        background: var(--ink);
+        color: #fff;
+        font-size: 12px;
+      }
+
+      .hero-video-card {
+        position: relative;
+        width: min(320px, 100%);
+        min-height: 178px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--ink);
+        padding: 16px;
+        display: grid;
+        align-content: space-between;
+        gap: 22px;
+      }
+
+      .hero-video-card span {
+        color: var(--muted);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero-video-card strong {
+        max-width: 210px;
+        font-size: 26px;
+        line-height: 0.98;
+        letter-spacing: -0.045em;
+        font-weight: 500;
+      }
+
+      .hero-video-card .play-dot {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+      }
+
+      .hero-video-feature {
+        position: relative;
+        width: min(360px, 100%);
+        min-height: 220px;
+        border: 1px solid var(--ink);
+        background: var(--dark);
+        color: #f4f4f2;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        justify-self: end;
+        padding: 24px;
+      }
+
+      .hero-video-feature::before {
+        content: "";
+        position: absolute;
+        inset: 16px;
+        border: 1px solid rgba(244,244,242,0.14);
+      }
+
+      .hero-video-feature::after { display: none; }
+
+      .hero-video-copy {
+        position: relative;
+        z-index: 2;
+        max-width: 220px;
+        display: grid;
+        justify-items: center;
+        gap: 14px;
+        text-align: center;
+      }
+
+      .hero-video-copy span {
+        color: #bdbdbd;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero-video-feature .play-dot {
+        position: relative;
+        right: auto;
+        top: auto;
+        background: #f05a1a;
+        width: 58px;
+        height: 58px;
+      }
+
+      .architecture-motion {
+        position: relative;
+        min-height: 520px;
+        margin-top: clamp(42px, 5vw, 76px);
+        border: 1px solid var(--ink);
+        background: var(--dark);
+        color: #f4f4f2;
+        overflow: hidden;
+      }
+
+      .architecture-motion::before,
+      .architecture-motion::after {
+        display: none;
+      }
+
+      .architecture-motion::before { top: 42%; }
+      .architecture-motion::after { top: 58%; }
+
+      .motion-core {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 210px;
+        height: 210px;
+        transform: translate(-50%, -50%);
+        border: 1px solid #f05a1a;
+        display: grid;
+        place-items: center;
+        color: #f4f4f2;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        z-index: 2;
+      }
+
+      .motion-core::before,
+      .motion-core::after {
+        content: "";
+        position: absolute;
+        border: 1px solid rgba(244,244,242,0.16);
+      }
+
+      .motion-core::before { inset: 26px; }
+      .motion-core::after { inset: 58px; border-color: rgba(240,90,26,0.42); }
+
+      .motion-signal {
+        position: absolute;
+        z-index: 3;
+        width: 8px;
+        height: 8px;
+        background: #f05a1a;
+        animation: architectureSignal 5.5s linear infinite;
+      }
+
+      .motion-signal.s1 { left: 9%; top: calc(42% - 4px); }
+      .motion-signal.s2 { left: 9%; top: calc(58% - 4px); animation-delay: -1.8s; }
+      .motion-signal.s3 { left: 9%; top: calc(50% - 4px); animation-delay: -3.4s; }
+
+      @keyframes architectureSignal {
+        0% { transform: translateX(0); opacity: 0; }
+        12%, 82% { opacity: 1; }
+        100% { transform: translateX(960px); opacity: 0; }
+      }
+
+      .motion-output {
+        position: absolute;
+        right: 8%;
+        width: 118px;
+        height: 72px;
+        border: 1px solid rgba(244,244,242,0.28);
+        background: #202020;
+        z-index: 2;
+      }
+
+      .motion-output.o1 { top: 24%; }
+      .motion-output.o2 { bottom: 24%; }
+
+      .motion-input {
+        position: absolute;
+        left: 8%;
+        width: 84px;
+        height: 84px;
+        border: 1px solid rgba(244,244,242,0.24);
+        background: #202020;
+        z-index: 2;
+      }
+
+      .motion-input.i1 { top: 22%; }
+      .motion-input.i2 { bottom: 22%; }
+
+      .architecture-flow {
+        position: relative;
+        z-index: 2;
+        min-height: 520px;
+        padding: clamp(24px, 4vw, 44px);
+        display: grid;
+        grid-template-columns: minmax(110px, 1fr) 54px minmax(140px, 1.08fr) 54px minmax(150px, 1.1fr) 54px minmax(130px, 1fr) 54px minmax(150px, 1.08fr);
+        gap: 10px;
+        align-items: center;
+      }
+
+      .architecture-node {
+        min-height: 174px;
+        border: 1px solid rgba(244,244,242,0.26);
+        background: #202020;
+        padding: 18px;
+        display: grid;
+        align-content: space-between;
+      }
+
+      .architecture-node.core {
+        min-height: 230px;
+        border-color: #f05a1a;
+      }
+
+      .architecture-node span,
+      .architecture-connector span {
+        color: #a6a6a6;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .architecture-node strong {
+        color: #f4f4f2;
+        font-size: clamp(22px, 2.3vw, 32px);
+        line-height: 1;
+        letter-spacing: -0.045em;
+        font-weight: 500;
+      }
+
+      .architecture-node p {
+        margin: 0;
+        color: #bdbdbd;
+        font-size: 12px;
+        line-height: 1.42;
+      }
+
+      .architecture-connector {
+        position: relative;
+        height: 1px;
+        background: rgba(244,244,242,0.34);
+      }
+
+      .architecture-connector::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: -3px;
+        width: 7px;
+        height: 7px;
+        background: #f05a1a;
+        animation: connectorPulse 4.8s linear infinite;
+      }
+
+      .architecture-connector::after {
+        content: "";
+        position: absolute;
+        right: -1px;
+        top: 50%;
+        width: 8px;
+        height: 8px;
+        border-top: 1px solid rgba(244,244,242,0.62);
+        border-right: 1px solid rgba(244,244,242,0.62);
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      .architecture-connector.c2::before { animation-delay: -1.2s; }
+      .architecture-connector.c3::before { animation-delay: -2.4s; }
+      .architecture-connector.c4::before { animation-delay: -3.6s; }
+
+      @keyframes connectorPulse {
+        0% { transform: translateX(0); opacity: 0; }
+        12%, 82% { opacity: 1; }
+        100% { transform: translateX(46px); opacity: 0; }
+      }
+
+      .architecture-preview {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: var(--surface);
+      }
+
+      .simple-architecture {
+        margin-top: clamp(42px, 5vw, 76px);
+        border: 1px solid var(--line);
+        background: var(--line);
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1px;
+      }
+
+      .simple-architecture div {
+        min-height: 190px;
+        background: var(--paper);
+        padding: 22px;
+        display: grid;
+        align-content: space-between;
+      }
+
+      .simple-architecture div:nth-child(3) {
+        background: var(--dark);
+        color: #f4f4f2;
+      }
+
+      .simple-architecture span,
+      .pain-stack span,
+      .product-flow-step span {
+        color: var(--muted);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .simple-architecture div:nth-child(3) span { color: #bdbdbd; }
+
+      .simple-architecture strong {
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        font-weight: 500;
+      }
+
+      .logo-strip-section {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: clamp(46px, 5vw, 78px) var(--gutter) clamp(8px, 1.5vw, 22px);
+      }
+
+      .logo-strip-section .hero-logo-strip {
+        width: min(920px, 100%);
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .pain-layout {
+        display: grid;
+        grid-template-columns: 1fr 0.78fr;
+        gap: clamp(44px, 8vw, 130px);
+        align-items: start;
+      }
+
+      .pain-stack {
+        display: grid;
+        gap: 1px;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .pain-stack div {
+        min-height: 86px;
+        background: var(--surface);
+        padding: 20px;
+        display: grid;
+        align-content: center;
+        gap: 8px;
+      }
+
+      .pain-stack strong {
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: -0.035em;
+        font-weight: 500;
+      }
+
+      .product-flow-board {
+        display: grid;
+        gap: 1px;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .product-flow-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--line);
+      }
+
+      .product-flow-step {
+        min-height: 150px;
+        background: var(--surface);
+        padding: 18px;
+        display: grid;
+        align-content: space-between;
+        position: relative;
+      }
+
+      .product-flow-step:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        width: 18px;
+        height: 1px;
+        background: #f05a1a;
+      }
+
+      .product-flow-step strong {
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: -0.035em;
+        font-weight: 500;
+      }
+
+      .shared-flow-core {
+        min-height: 108px;
+        background: var(--dark);
+        color: #f4f4f2;
+        padding: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .shared-flow-core span { color: #bdbdbd; }
+
+      .operator-control-panel {
+        display: grid;
+        grid-template-columns: 0.9fr repeat(4, 1fr);
+        gap: 1px;
+        background: var(--line);
+      }
+
+      .operator-control-panel div {
+        min-height: 118px;
+        background: var(--paper);
+        padding: 18px;
+        display: grid;
+        align-content: space-between;
+      }
+
+      .operator-control-panel div:first-child {
+        background: var(--dark);
+        color: #f4f4f2;
+      }
+
+      .operator-control-panel span {
+        color: var(--muted);
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .operator-control-panel div:first-child span { color: #bdbdbd; }
+
+      .operator-control-panel strong {
+        font-size: 18px;
+        line-height: 1;
+        letter-spacing: -0.035em;
+        font-weight: 500;
       }
 
       .product-tracks {
@@ -2846,6 +3421,7 @@
         .nav-inner { grid-template-columns: 1fr auto; }
         .nav-links { display: none; }
         .hero-layout,
+        .product-hero,
         .gap-grid,
         .compare-grid,
         .simple-compare,
@@ -2871,6 +3447,18 @@
         .advisor-cards { grid-template-columns: 1fr; }
         .operator-core { grid-template-columns: 1fr; }
         .architecture-console { min-height: 560px; }
+        .hero-system-panel { min-height: 560px; }
+        .hero-video-feature { min-height: 220px; }
+        .architecture-flow {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+        .architecture-connector { display: none; }
+        .simple-architecture,
+        .operator-control-panel,
+        .pain-layout,
+        .product-flow-row { grid-template-columns: 1fr; }
+        .shared-flow-core { display: grid; }
         .platform-visual { min-height: 720px; }
         .platform-node.n1,
         .platform-node.n2,
@@ -2997,6 +3585,25 @@
         .nav-action .btn span:first-child { display: none; }
         .hero-logos { grid-template-columns: repeat(2, 1fr); }
         .hero-logos span { min-height: 38px; }
+        .hero-system-panel { min-height: 500px; }
+        .hero-video-feature { min-height: 200px; }
+        .architecture-motion { min-height: 430px; }
+        .motion-core { width: 150px; height: 150px; }
+        .motion-output { width: 78px; height: 56px; }
+        .motion-input { width: 62px; height: 62px; }
+        .hero-video-card { min-height: 156px; }
+        .system-node {
+          width: 88px;
+          height: 88px;
+          font-size: 8px;
+        }
+        .system-node.core { width: 132px; height: 132px; }
+        .mini-video-card {
+          left: 18px;
+          right: 18px;
+          bottom: 18px;
+          width: auto;
+        }
         .proof-row,
         .compare-panels,
         .loop-strip,
@@ -3098,84 +3705,112 @@
             <span>Providio</span>
           </a>
           <div class="nav-links">
+            <a href="#architecture">Architecture</a>
             <a href="#products">Products</a>
-            <a href="#context">Context</a>
-            <a href="#machine">Machine</a>
+            <a href="#flows">Flows</a>
             <a href="#trust">Trust</a>
-            <a href="#contact">Access</a>
+            <a href="#investors">Investors</a>
           </div>
           <div class="nav-action">
-            <a class="btn" href="#contact"><span>See the product flow</span><span class="arrow">&rarr;</span></a>
+            <a class="btn" href="#contact"><span>See Providio in Action</span><span class="arrow">&rarr;</span></a>
           </div>
         </div>
       </nav>
 
       <header id="top" class="section first">
-        <div class="hero-layout centered">
+        <div class="product-hero">
           <div class="hero-copy reveal">
-            <p class="kicker">Airline intelligence platform</p>
-            <h1 class="mega">Two products. One intelligence layer.</h1>
-            <p class="lead">Providio is already in production with a design partner, powering revenue and marketing spend decisions through enterprise-specific context and language models.</p>
+            <p class="kicker">AI-native Architecture of Action</p>
+            <h1 class="mega">Commercial AI that executes.</h1>
+            <p class="lead">Providio deploys an AI-native System of Action that learns your airline's business logic and writes coordinated revenue and marketing decisions directly into your systems.</p>
             <div class="hero-actions">
-              <a class="btn" href="#contact"><span>See the product flow</span><span class="arrow">&rarr;</span></a>
-              <a class="btn secondary" href="#products"><span>Explore products</span><span class="arrow">&darr;</span></a>
+              <a class="btn" href="#contact"><span>See Providio in Action</span><span class="arrow">&rarr;</span></a>
+              <a class="btn secondary" href="#architecture"><span>See the architecture</span><span class="arrow">&darr;</span></a>
             </div>
-            <div class="platform-visual" aria-label="Animated platform flow from airline inputs through context engineering to products and governed action">
-              <div class="platform-map">
-                <div class="stage-label inputs">01 Inputs</div>
-                <div class="stage-label context">02 Context engineering</div>
-                <div class="stage-label products">03 Products</div>
-                <div class="stage-label action">04 Governed action</div>
-
-                <div class="flow-card signal"><span>Signals</span><strong>Demand, fares, inventory</strong></div>
-                <div class="flow-card mvd"><span>MVD</span><strong>Minimum viable data</strong></div>
-                <div class="flow-card history"><span>History</span><strong>Past decisions + outcomes</strong></div>
-
-                <div class="flow-arrow a1" aria-hidden="true"></div>
-                <div class="flow-arrow a2" aria-hidden="true"></div>
-                <div class="flow-arrow a3" aria-hidden="true"></div>
-
-                <div class="flow-card graph"><span>Context graph</span><strong>Outcome-binding work context</strong><p>Stakeholders, constraints, rules, handoffs, and decision history.</p></div>
-                <div class="flow-card model"><span>Domain model</span><strong>Airline language layer</strong><p>SLM reasoning over airline-specific context scenarios.</p></div>
-
-                <div class="flow-arrow a4" aria-hidden="true"></div>
-                <div class="flow-arrow a5" aria-hidden="true"></div>
-
-                <div class="flow-join"><span>Signal blend</span><strong>Shared intelligence</strong></div>
-
-                <div class="flow-arrow a6" aria-hidden="true"></div>
-                <div class="flow-arrow a7" aria-hidden="true"></div>
-
-                <div class="flow-card revenue"><span>Product 01</span><strong>Revenue decisions</strong></div>
-                <div class="flow-card marketing"><span>Product 02</span><strong>Marketing spend</strong></div>
-
-                <div class="flow-arrow a8" aria-hidden="true"></div>
-                <div class="flow-arrow a9" aria-hidden="true"></div>
-
-                <div class="flow-action"><span>Trust layer</span><strong>Approval, audit, action</strong><p>Human-in-the-loop by design before work moves into systems.</p></div>
-              </div>
-            </div>
-            <div class="hero-logo-strip" aria-label="Product walkthrough contents">
-              <p class="caption">Private walkthrough shows</p>
-              <div class="hero-logos">
-                <span>Revenue flow</span>
-                <span>Spend flow</span>
-                <span>Shared context</span>
-                <span>Language layer</span>
-                <span>Agent handoff</span>
-                <span>Guardrail trace</span>
-              </div>
+          </div>
+          <div class="hero-video-feature reveal d2" aria-label="Product walkthrough thumbnail">
+            <div class="hero-video-copy">
+              <div class="play-dot" aria-hidden="true">Play</div>
+              <span>2 min product walkthrough</span>
             </div>
           </div>
         </div>
       </header>
 
-      <section class="proof-section reveal d3" aria-label="Product walkthrough contents">
-        <div class="proof-row">
-          <div class="metric"><strong>Revenue flow</strong><span>How a commercial signal becomes a recommended action</span></div>
-          <div class="metric"><strong>Spend flow</strong><span>How budget movement connects to route opportunity</span></div>
-          <div class="metric"><strong>Shared context</strong><span>How both products reuse the same intelligence layer</span></div>
-          <div class="metric"><strong>Guardrail trace</strong><span>How approval, policy, and audit stay visible</span></div>
+      <section class="architecture-preview" aria-label="Architecture preview">
+        <div class="section">
+          <div class="wide-intro reveal">
+            <div>
+              <p class="kicker">Architecture preview</p>
+              <h2>Signal in. Action out.</h2>
+            </div>
+            <p class="copy">Providio fuses commercial signals, reasons through business logic, coordinates Action Agents, and executes within strict guardrails.</p>
+          </div>
+          <div class="architecture-motion reveal d2" aria-label="Labeled architecture motion visual">
+            <div class="architecture-flow">
+              <div class="architecture-node"><span>01 Signals</span><strong>Commercial signals</strong><p>Demand, fares, inventory, spend, and channel movement.</p></div>
+              <div class="architecture-connector c1" aria-hidden="true"></div>
+              <div class="architecture-node"><span>02 Context</span><strong>Enterprise Context Model</strong><p>Maps proprietary data, relationships, taxonomy, and revenue logic.</p></div>
+              <div class="architecture-connector c2" aria-hidden="true"></div>
+              <div class="architecture-node core"><span>03 Execution</span><strong>Enterprise-Specific SLM</strong><p>Reasons through domain scenarios with lower latency and secure tenancy.</p></div>
+              <div class="architecture-connector c3" aria-hidden="true"></div>
+              <div class="architecture-node"><span>04 Agents</span><strong>Action Agents</strong><p>Traverse cross-functional constraints to execute work across silos.</p></div>
+              <div class="architecture-connector c4" aria-hidden="true"></div>
+              <div class="architecture-node"><span>05 Trust</span><strong>Guardrailed Execution</strong><p>Writes decisions within policy, HITL exceptions, and audit logs.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="logo-strip-section" aria-label="Commercial execution areas">
+        <div class="hero-logo-strip reveal">
+          <p class="caption">Designed to connect commercial execution across</p>
+          <div class="hero-logos">
+            <span>Revenue</span>
+            <span>Pricing</span>
+            <span>Marketing</span>
+            <span>Finance</span>
+            <span>Inventory</span>
+            <span>Systems of record</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="problem" class="section">
+        <div class="pain-layout">
+          <div>
+            <p class="kicker">The execution ceiling</p>
+            <h2>Your operators are trapped in the middle.</h2>
+            <p class="copy">Revenue, pricing, marketing, and finance teams move with different tools, different KPIs, and different versions of the truth. Operators become the manual integration layer.</p>
+            <p class="copy">Providio deploys the architecture to break it.</p>
+          </div>
+          <div class="pain-stack reveal d2" aria-label="Execution ceiling symptoms">
+            <div><span>01</span><strong>Manual synthesis</strong></div>
+            <div><span>02</span><strong>Conflicting KPIs</strong></div>
+            <div><span>03</span><strong>Delayed consensus</strong></div>
+            <div><span>04</span><strong>Local optimization</strong></div>
+            <div><span>05</span><strong>Trapped value</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="architecture" class="architecture-section">
+        <div class="section">
+          <div class="wide-intro reveal">
+            <div>
+              <p class="kicker">Architecture of Action</p>
+              <h2>The Engine behind execution.</h2>
+            </div>
+            <p class="copy">Providio pairs an Enterprise Context Model with enterprise-specific Small Language Models. The context model anchors AI in proprietary revenue logic. The SLM reasons through domain scenarios. Action Agents execute the work within Trust Architecture.</p>
+          </div>
+          <div class="machine-layer reveal d2" aria-label="Providio Architecture of Action stack">
+            <div class="machine-card"><span>01</span><strong>Context Model</strong><p>Maps proprietary data, ontologies, relationships, taxonomy, and revenue logic.</p></div>
+            <div class="machine-card"><span>02</span><strong>Minimum viable data</strong><p>Engineers only the context required to bind outcomes and execute decisions.</p></div>
+            <div class="machine-card core"><span>03</span><strong>Enterprise SLM</strong><p>Compact domain models reason through enterprise-specific scenarios with lower latency.</p></div>
+            <div class="machine-card"><span>04</span><strong>Action Agents</strong><p>Traverse the context graph to orchestrate work across revenue and spend.</p></div>
+            <div class="machine-card"><span>05</span><strong>Trust Architecture</strong><p>Policy, permissions, HITL exceptions, and audit logs keep execution verifiable.</p></div>
+            <div class="machine-card"><span>06</span><strong>Decision data</strong><p>Executed decisions create new data that sharpens the next action.</p></div>
+          </div>
         </div>
       </section>
 
@@ -3183,97 +3818,81 @@
         <div class="wide-intro reveal">
           <div>
             <p class="kicker">Product tracks</p>
-            <h2>Revenue moves. Marketing aligns.</h2>
+            <h2>Two products. One brain.</h2>
           </div>
-          <p class="copy">Providio launches with two airline commercial products. Each can create value independently, while the shared intelligence layer lets them reinforce each other as usage matures.</p>
+          <p class="copy">Revenue Optimization and Marketing Spend Optimization create standalone value. Together, they resolve cross-functional tradeoffs through one shared reasoning layer.</p>
         </div>
-        <div class="product-tracks reveal d2" aria-label="Two product tracks">
+        <div class="product-tracks reveal d2" aria-label="Two Providio product tracks">
           <div class="track-card">
             <div>
               <span>Product 01</span>
-              <h3>Revenue Decisions</h3>
-              <p class="copy">Detects revenue pressure and opportunity across demand, inventory, pricing rules, and commercial constraints.</p>
+              <h3>Revenue Optimization</h3>
+              <p class="copy">Execute revenue-driving decisions before the opportunity expires.</p>
             </div>
             <div class="track-list">
-              <div>Works standalone for revenue teams</div>
-              <div>Reasons over airline-specific tradeoffs</div>
-              <div>Prepares governed commercial actions</div>
+              <div>Unifies demand, fares, inventory, and policy</div>
+              <div>Reasons through airline-specific tradeoffs</div>
+              <div>Writes verifiable actions into revenue systems</div>
             </div>
           </div>
           <div class="track-card dark">
             <div>
               <span>Product 02</span>
               <h3>Marketing Spend Optimization</h3>
-              <p class="copy">Connects spend, channel performance, demand movement, and commercial intent so marketing can support the right outcomes.</p>
+              <p class="copy">Move budget toward demand instead of optimizing campaigns in isolation.</p>
             </div>
             <div class="track-list">
-              <div>Works standalone for marketing teams</div>
-              <div>Sees spend as a commercial lever</div>
-              <div>Shifts budget around live opportunity</div>
+              <div>Connects budget, channels, and commercial intent</div>
+              <div>Aligns campaigns to revenue opportunities</div>
+              <div>Triggers governed spend moves inside constraints</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="context" class="gap-section">
+      <section id="flows" class="gap-section">
         <div class="section">
           <div class="wide-intro reveal">
             <div>
-              <p class="kicker">Product intersection</p>
-              <h2>Separate products. Shared context.</h2>
+              <p class="kicker">Product flow preview</p>
+              <h2>Watch work move.</h2>
             </div>
-            <p class="copy">Revenue and marketing spend can run separately. When they share context, Providio prevents local optimization and turns commercial signals into coordinated action.</p>
+            <p class="copy">The launch flow shows how Providio turns live commercial signals into governed actions across revenue and marketing spend.</p>
           </div>
-          <div class="intersection-map reveal d2" aria-label="Revenue and marketing products intersect through shared context">
-            <div class="machine-card"><span>Revenue context</span><strong>Demand, inventory, fare rules</strong><p>Finds the commercial move worth making now.</p></div>
-            <div class="machine-card core"><span>Shared layer</span><strong>Outcome-binding context</strong><p>Captures stakeholders, constraints, policies, handoffs, and decision history.</p></div>
-            <div class="machine-card"><span>Marketing context</span><strong>Spend, channel, campaign timing</strong><p>Aligns spend to the revenue action instead of optimizing in isolation.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="machine" class="architecture-section">
-        <div class="section">
-          <div class="wide-intro reveal">
-            <div>
-              <p class="kicker">Core machine layer</p>
-              <h2>The model underneath.</h2>
+          <div class="product-flow-board reveal d2" aria-label="Revenue and spend signal-to-action flows">
+            <div class="product-flow-row">
+              <div class="product-flow-step"><span>Revenue</span><strong>Revenue signal</strong></div>
+              <div class="product-flow-step"><span>Reason</span><strong>Reasoning</strong></div>
+              <div class="product-flow-step"><span>Control</span><strong>Guardrail</strong></div>
+              <div class="product-flow-step"><span>Execute</span><strong>Revenue action</strong></div>
             </div>
-            <p class="copy">The public product experience sits on top of Providio's context-engineered machine: context graphs, minimum viable data, domain language models, agents, and trust architecture.</p>
+            <div class="shared-flow-core"><span>The Engine</span><strong>Enterprise Context Model + Enterprise-Specific SLM.</strong></div>
+            <div class="product-flow-row">
+              <div class="product-flow-step"><span>Spend</span><strong>Spend signal</strong></div>
+              <div class="product-flow-step"><span>Reason</span><strong>Reasoning</strong></div>
+              <div class="product-flow-step"><span>Control</span><strong>Guardrail</strong></div>
+              <div class="product-flow-step"><span>Execute</span><strong>Budget action</strong></div>
+            </div>
           </div>
-          <div class="machine-layer reveal d2" aria-label="Providio core stack">
-            <div class="machine-card"><span>01</span><strong>Context graphs</strong><p>Outcome playbooks capture how airline work actually gets done.</p></div>
-            <div class="machine-card"><span>02</span><strong>Minimum viable data</strong><p>Start with high-signal datasets, then expand the intelligence layer over time.</p></div>
-            <div class="machine-card core"><span>03</span><strong>Domain language model</strong><p>The SLM reasons over airline-specific context scenarios and tradeoffs.</p></div>
-            <div class="machine-card"><span>04</span><strong>Multi-stakeholder reasoning</strong><p>Revenue, marketing, pricing, finance, and policy reason toward one outcome.</p></div>
-            <div class="machine-card"><span>05</span><strong>Agents</strong><p>Agents walk the context graph and coordinate work across boundaries.</p></div>
-            <div class="machine-card"><span>06</span><strong>Trust architecture</strong><p>Guardrails, escalation paths, approvals, and traceability keep actions safe.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="wide-intro reveal">
-          <div>
-            <p class="kicker">Differentiation</p>
-            <h2>Not data context. Work context.</h2>
-          </div>
-          <p class="copy">Most enterprise AI uses context to understand data. Providio uses context to understand work: the outcomes, stakeholders, constraints, and decisions that bind commercial action together.</p>
-        </div>
-        <div class="context-compare reveal d2" aria-label="Context model comparison">
-          <div class="context-card"><span>Generic AI</span><strong>Data contains context</strong><p>Useful for answers, summaries, and isolated task acceleration.</p></div>
-          <div class="context-card"><span>Process context</span><strong>Operations become visible</strong><p>Shows how work flows and where AI can be introduced.</p></div>
-          <div class="context-card highlight"><span>Providio</span><strong>Work context drives action</strong><p>Turns outcome-binding context into precise, governed commercial decisions.</p></div>
         </div>
       </section>
 
       <section class="human-section">
-        <div class="section wide-intro">
+        <div class="section wide-intro" style="padding-bottom: 0;">
           <div class="reveal">
-            <p class="kicker">Universal airline problem</p>
-            <h2>Same problem. Different scale.</h2>
+            <p class="kicker">Operator enablement</p>
+            <h2>Manage agents, not spreadsheets.</h2>
           </div>
-          <p class="copy reveal d2">Small airlines need leverage without adding headcount. Large airlines need alignment across more systems, teams, and budgets. The problem is the same: revenue and marketing decisions are split across signals that should reinforce each other.</p>
+          <p class="copy reveal d2">Operators set thresholds, approve exceptions, and review outcomes. Providio's Context Model and SLM handle the synthesis, so human judgment moves from manual calculation to command.</p>
+        </div>
+        <div class="section" style="padding-top: min(100px, 6vw);">
+          <div class="operator-control-panel reveal d2" aria-label="Operator control layer">
+            <div><span>Operator control</span><strong>Command the work</strong></div>
+            <div><span>01</span><strong>Set thresholds</strong></div>
+            <div><span>02</span><strong>Approve exceptions</strong></div>
+            <div><span>03</span><strong>Tune guardrails</strong></div>
+            <div><span>04</span><strong>Review outcomes</strong></div>
+          </div>
         </div>
       </section>
 
@@ -3281,12 +3900,12 @@
         <div class="trust-layout">
           <div class="reveal">
             <p class="kicker">Trust architecture</p>
-            <h2>Trust is not a feature. Trust is the system.</h2>
+            <h2>Control is built in.</h2>
             <p class="lead">No black box execution.</p>
-            <p class="copy">Every action is constrained by policy, routed through approval when needed, and logged with the trigger, rule, owner, and outcome.</p>
+            <p class="copy">Providio executes within pricing boundaries, budget limits, role permissions, and policy constraints. Every decision is logged, traceable, and auditable.</p>
             <div class="trust-claim">
-              <strong>We do not train models on your data.</strong>
-              <p>Providio uses your business context to govern your decisions, not to feed a shared model. Customer logic stays bounded, traceable, and controlled.</p>
+              <strong>We never train models on your data.</strong>
+              <p>Providio provides the secure runtime. You own the intelligence.</p>
             </div>
           </div>
           <div class="trust-card-loop reveal d2" aria-label="Animated decision trace cards">
@@ -3301,17 +3920,17 @@
         </div>
       </section>
 
-      <section id="proof-team" class="advisors-section">
+      <section id="investors" class="advisors-section">
         <div class="section advisor-grid">
           <div class="reveal">
-            <p class="kicker">Operator credibility</p>
-            <h2>Built with operators. Made for execution.</h2>
-            <p class="copy">Providio is shaped by people who have carried revenue, pricing, airline, mobility, and enterprise technology decisions from the inside.</p>
+            <p class="kicker">Investor / strategy view</p>
+            <h2>A wedge into commercial execution.</h2>
+            <p class="copy">Providio starts with airlines and expands across margin-critical industries where demand, inventory, pricing, and spend decisions move faster than consensus.</p>
           </div>
-          <div class="advisor-cards reveal d2" aria-label="Founders and advisors placeholders">
-            <div class="advisor-card"><span>Founder</span><strong>Sanjay Joshi</strong><p class="copy">Commercial operator building the system he wanted inside the enterprise.</p></div>
-            <div class="advisor-card"><span>Advisor</span><strong>Airline revenue leader</strong><p class="copy">Recognized industry operator. Public profile pending launch approval.</p></div>
-            <div class="advisor-card"><span>Advisor</span><strong>Enterprise AI operator</strong><p class="copy">Supports the trust, GTM, and architecture motion behind the first proof flows.</p></div>
+          <div class="advisor-cards reveal d2" aria-label="Investor strategy pillars">
+            <div class="advisor-card"><span>Category</span><strong>Beyond copilots</strong><p class="copy">Copilots advise individual users. Providio executes coordinated decisions across functions.</p></div>
+            <div class="advisor-card"><span>Moat</span><strong>The Engine</strong><p class="copy">Enterprise Context Models and enterprise-specific SLMs create the defensible layer.</p></div>
+            <div class="advisor-card"><span>Expansion</span><strong>Commercial lifecycle</strong><p class="copy">Revenue and marketing spend are the first product tracks in a broader Architecture of Action.</p></div>
           </div>
         </div>
       </section>
@@ -3321,15 +3940,15 @@
           <div class="footer-cta reveal">
             <div>
               <p class="kicker">Private capability preview</p>
-              <h2>See the product flow.</h2>
+              <h2>See Providio execute.</h2>
             </div>
             <div>
-              <p class="copy">Use your work email to request the private walkthrough. We will share the product flow first, then open a deeper capability conversation if it fits.</p>
+              <p class="copy">Request a private walkthrough of the product flow, Architecture of Action, and guardrail trace.</p>
               <form class="access-form">
                 <label for="work-email">Work email</label>
                 <div class="access-row">
                   <input id="work-email" type="email" placeholder="name@company.com" aria-label="Work email" />
-                  <button type="button">Request walkthrough</button>
+                  <button type="button">See Providio in Action</button>
                 </div>
               </form>
             </div>
@@ -3339,11 +3958,11 @@
             <div class="footer-logo">Providio</div>
             <div class="footer-col">
               <h3>Sections</h3>
+              <a href="#architecture">Architecture</a>
               <a href="#products">Products</a>
-              <a href="#context">Context</a>
-              <a href="#machine">Machine layer</a>
+              <a href="#flows">Product flows</a>
               <a href="#trust">Trust</a>
-              <a href="#proof-team">Proof team</a>
+              <a href="#investors">Investors</a>
             </div>
             <div class="newsletter">
               <h3>Contact</h3>
@@ -3358,7 +3977,7 @@
 
           <div class="footer-bottom">
             <span>Providio AI</span>
-            <span>Wireframe v10. Platform plus two product tracks.</span>
+            <span>Wireframe v14. Hero video thumbnail and labeled architecture flow.</span>
           </div>
         </div>
       </section>
