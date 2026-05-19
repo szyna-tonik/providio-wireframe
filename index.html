@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Providio Landing Wireframe V13</title>
+    <title>Providio Landing Wireframe V15</title>
     <style>
       :root {
         --ink: #101010;
@@ -2088,7 +2088,7 @@
         color: #f4f4f2;
       }
 
-      .architecture-section .section { max-width: var(--wide); }
+      .architecture-section .section { max-width: var(--max); }
       .architecture-section .kicker,
       .architecture-section .copy { color: #bdbdbd; }
 
@@ -3413,6 +3413,327 @@
 
       @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
 
+      /* V15 communication update */
+      .copy {
+        color: var(--ink);
+        font-size: 18px;
+        line-height: 1.58;
+      }
+
+      .section.dark,
+      .architecture-section,
+      .trust-section,
+      .site-footer {
+        color: #f4f4f2;
+      }
+
+      .section.dark .copy,
+      .architecture-section .copy,
+      .trust-section .copy,
+      .site-footer .copy,
+      .track-card.dark .copy,
+      .footer-cta .copy {
+        color: #f4f4f2;
+      }
+
+      .product-hero.v15 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: clamp(38px, 5vw, 74px);
+        align-items: start;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .product-hero.v15 .hero-copy {
+        max-width: 1120px;
+        justify-items: center;
+        margin: 0 auto;
+      }
+
+      .product-hero.v15 .mega {
+        max-width: 1040px;
+      }
+
+      .product-hero.v15 .lead {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .runtime-section {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: var(--surface);
+      }
+
+      .runtime-section .hero-architecture-field {
+        margin-top: clamp(42px, 5vw, 76px);
+      }
+
+      .hero-architecture-field {
+        border: 1px solid var(--ink);
+        background: var(--dark);
+        color: #f4f4f2;
+        min-height: clamp(390px, 45vw, 600px);
+        padding: clamp(22px, 4vw, 46px);
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: clamp(24px, 4vw, 46px);
+        overflow: hidden;
+      }
+
+      .hero-architecture-top,
+      .hero-architecture-bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        color: #f4f4f2;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero-architecture-map {
+        display: grid;
+        grid-template-columns: minmax(150px, 0.9fr) 44px minmax(210px, 1.2fr) 44px minmax(150px, 0.9fr) 44px minmax(190px, 1fr);
+        gap: 14px;
+        align-items: center;
+      }
+
+      .hero-engine-card,
+      .hero-engine-core,
+      .hero-engine-action {
+        min-height: 170px;
+        border: 1px solid rgba(244, 244, 242, 0.28);
+        background: #202020;
+        padding: 20px;
+        display: grid;
+        align-content: space-between;
+        gap: 18px;
+      }
+
+      .hero-engine-core {
+        min-height: 250px;
+        border-color: #f05a1a;
+      }
+
+      .hero-engine-card span,
+      .hero-engine-core span,
+      .hero-engine-action span,
+      .value-card span,
+      .wedge-card span,
+      .benefit-card span,
+      .trust-stage span,
+      .lifecycle-card span {
+        color: #a6a6a6;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero-engine-card strong,
+      .hero-engine-core strong,
+      .hero-engine-action strong,
+      .value-card strong,
+      .wedge-card strong,
+      .benefit-card strong,
+      .trust-stage strong,
+      .lifecycle-card strong {
+        font-size: clamp(22px, 2.4vw, 34px);
+        line-height: 1;
+        letter-spacing: -0.045em;
+        font-weight: 500;
+      }
+
+      .hero-engine-card p,
+      .hero-engine-core p,
+      .hero-engine-action p,
+      .value-card p,
+      .wedge-card p,
+      .benefit-card p,
+      .trust-stage p,
+      .lifecycle-card p {
+        margin: 0;
+        color: inherit;
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+      .hero-engine-connector,
+      .wedge-connector {
+        height: 1px;
+        background: #f05a1a;
+        position: relative;
+      }
+
+      .hero-engine-connector::after,
+      .wedge-connector::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 8px;
+        height: 8px;
+        border-right: 1px solid #f05a1a;
+        border-top: 1px solid #f05a1a;
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      .value-grid,
+      .architecture-stack-v15,
+      .benefit-grid,
+      .trust-progression,
+      .lifecycle-grid {
+        display: grid;
+        gap: 1px;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .value-grid { grid-template-columns: repeat(5, 1fr); }
+      .pain-layout .value-grid { grid-template-columns: 1fr; }
+      .architecture-stack-v15 { grid-template-columns: repeat(4, 1fr); }
+      .benefit-grid { grid-template-columns: repeat(4, 1fr); }
+      .trust-progression {
+        grid-template-columns: repeat(4, 1fr);
+        width: min(var(--max), calc(100% - (var(--gutter) * 2)));
+        margin: 0 auto;
+        border-color: #3a3a3a;
+        background: #3a3a3a;
+      }
+      .lifecycle-grid { grid-template-columns: repeat(3, 1fr); }
+
+      .value-card,
+      .architecture-stack-v15 .machine-card,
+      .benefit-card,
+      .trust-stage,
+      .lifecycle-card {
+        min-height: 240px;
+        background: var(--surface);
+        color: var(--ink);
+        padding: clamp(22px, 3vw, 34px);
+        display: grid;
+        align-content: space-between;
+        gap: 22px;
+      }
+
+      .pain-layout .value-card { min-height: 118px; }
+
+      .architecture-stack-v15 .machine-card.core {
+        background: var(--dark);
+        color: #f4f4f2;
+      }
+
+      .trust-stage.earned {
+        border-top: 3px solid #f05a1a;
+      }
+
+      .architecture-stack-v15 .machine-card p {
+        margin: 0;
+        color: inherit;
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+      .product-wedge-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .wedge-card {
+        min-height: 590px;
+        background: var(--surface);
+        color: var(--ink);
+        padding: clamp(28px, 4vw, 52px);
+        display: grid;
+        gap: 34px;
+      }
+
+      .wedge-card.dark {
+        background: var(--dark);
+        color: #f4f4f2;
+      }
+
+      .wedge-flow {
+        display: grid;
+        grid-template-columns: 1fr 28px 1fr 28px 1fr;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .wedge-step {
+        min-height: 132px;
+        border: 1px solid currentColor;
+        padding: 16px;
+        display: grid;
+        align-content: space-between;
+        gap: 20px;
+      }
+
+      .wedge-step strong {
+        font-size: 18px;
+        line-height: 1.08;
+        letter-spacing: -0.035em;
+        font-weight: 500;
+      }
+
+      .text-link {
+        color: inherit;
+        font-family: "Geist Mono", "SF Mono", ui-monospace, monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .text-link::after { content: " ->"; color: #f05a1a; }
+
+      .trust-section .lead { color: #f4f4f2; }
+
+      .trust-layout.v15 {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        align-items: start;
+      }
+
+      .trust-principles {
+        display: grid;
+        gap: 1px;
+        border: 1px solid #3a3a3a;
+        background: #3a3a3a;
+      }
+
+      .trust-principles div {
+        background: #202020;
+        padding: 20px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .trust-principles strong {
+        font-size: 22px;
+        line-height: 1;
+        letter-spacing: -0.035em;
+        font-weight: 500;
+      }
+
+      .trust-principles p {
+        margin: 0;
+        color: #f4f4f2;
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+      .advisors-section.v15 .kicker,
+      .advisors-section.v15 .copy,
+      .advisors-section.v15 .lifecycle-card span,
+      .advisors-section.v15 .lifecycle-card p {
+        color: var(--ink);
+      }
+
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
           animation-duration: 0.01ms !important;
@@ -3578,6 +3899,18 @@
           grid-row: auto;
         }
         .value-core { grid-column: 1 / -1; min-height: 170px; }
+        .hero-architecture-map,
+        .product-wedge-grid,
+        .value-grid,
+        .architecture-stack-v15,
+        .benefit-grid,
+        .trust-progression,
+        .lifecycle-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-engine-connector,
+        .wedge-connector { display: none; }
+        .wedge-flow { grid-template-columns: 1fr; }
         .footer { flex-direction: column; }
       }
 
@@ -3684,6 +4017,21 @@
         }
         .value-map { grid-template-columns: 1fr; }
         .value-core { grid-column: auto; }
+        .copy,
+        .hero-engine-card p,
+        .hero-engine-core p,
+        .hero-engine-action p,
+        .value-card p,
+        .wedge-card p,
+        .benefit-card p,
+        .trust-stage p,
+        .lifecycle-card p,
+        .trust-principles p,
+        .architecture-stack-v15 .machine-card p {
+          font-size: 17px;
+        }
+        .hero-architecture-top,
+        .hero-architecture-bottom { display: grid; }
         .footer-shell { padding-left: 18px; padding-right: 18px; }
         .footer-logo { font-size: clamp(58px, 21vw, 118px); }
         .footer-bottom { flex-direction: column; }
@@ -3713,9 +4061,9 @@
           <div class="nav-links">
             <a href="#architecture">Architecture</a>
             <a href="#products">Products</a>
-            <a href="#flows">Flows</a>
+            <a href="#operators">Operators</a>
             <a href="#trust">Trust</a>
-            <a href="#investors">Investors</a>
+            <a href="#lifecycle">Expansion</a>
           </div>
           <div class="nav-action">
             <a class="btn" href="#contact"><span>See Providio in Action</span><span class="arrow">&rarr;</span></a>
@@ -3724,20 +4072,14 @@
       </nav>
 
       <header id="top" class="section first">
-        <div class="product-hero">
+        <div class="product-hero v15">
           <div class="hero-copy reveal">
             <p class="kicker">AI-native Architecture of Action</p>
-            <h1 class="mega">Commercial AI that executes.</h1>
-            <p class="lead">Providio deploys an AI-native System of Action that learns your airline's business logic and writes coordinated revenue and marketing decisions directly into your systems.</p>
+            <h1 class="mega">Copilots advise. Providio executes.</h1>
+            <p class="lead">Providio deploys an AI-native System of Action that learns your enterprise business logic and writes coordinated P&amp;L decisions directly into your systems.</p>
             <div class="hero-actions">
               <a class="btn" href="#contact"><span>See Providio in Action</span><span class="arrow">&rarr;</span></a>
               <a class="btn secondary" href="#architecture"><span>See the architecture</span><span class="arrow">&darr;</span></a>
-            </div>
-          </div>
-          <div class="hero-video-feature reveal d2" aria-label="Product walkthrough thumbnail">
-            <div class="hero-video-copy">
-              <div class="play-dot" aria-hidden="true">Play</div>
-              <span>2 min product walkthrough</span>
             </div>
           </div>
         </div>
@@ -3754,27 +4096,27 @@
         </div>
       </header>
 
-      <section class="architecture-preview" aria-label="Architecture preview">
+      <section class="runtime-section" aria-label="Secure reasoning runtime">
         <div class="section">
           <div class="wide-intro reveal">
             <div>
-              <p class="kicker">Architecture preview</p>
-              <h2>Signal in. Action out.</h2>
+              <p class="kicker">Secure reasoning runtime</p>
+              <h2>We provide the runtime. You own the intelligence.</h2>
             </div>
-            <p class="copy">Providio fuses commercial signals, reasons through business logic, coordinates Action Agents, and executes within strict guardrails.</p>
+            <p class="copy">Providio encodes your unique business logic inside a secure execution architecture. Your data stays ring-fenced, your operators command the work, and every decision writes back as auditable action.</p>
           </div>
-          <div class="architecture-motion reveal d2" aria-label="Labeled architecture motion visual">
-            <div class="architecture-flow">
-              <div class="architecture-node"><span>01 Signals</span><strong>Commercial signals</strong><p>Demand, fares, inventory, spend, and channel movement.</p></div>
-              <div class="architecture-connector c1" aria-hidden="true"></div>
-              <div class="architecture-node"><span>02 Context</span><strong>Enterprise Context Model</strong><p>Maps proprietary data, relationships, taxonomy, and revenue logic.</p></div>
-              <div class="architecture-connector c2" aria-hidden="true"></div>
-              <div class="architecture-node core"><span>03 Execution</span><strong>Enterprise-Specific SLM</strong><p>Reasons through domain scenarios with lower latency and secure tenancy.</p></div>
-              <div class="architecture-connector c3" aria-hidden="true"></div>
-              <div class="architecture-node"><span>04 Agents</span><strong>Action Agents</strong><p>Traverse cross-functional constraints to execute work across silos.</p></div>
-              <div class="architecture-connector c4" aria-hidden="true"></div>
-              <div class="architecture-node"><span>05 Trust</span><strong>Guardrailed Execution</strong><p>Writes decisions within policy, HITL exceptions, and audit logs.</p></div>
+          <div class="hero-architecture-field reveal d2" aria-label="Architecture of Action execution field">
+            <div class="hero-architecture-top"><span>Live commercial signals</span><span>Secure reasoning runtime</span><span>Verifiable execution</span></div>
+            <div class="hero-architecture-map">
+              <div class="hero-engine-card"><span>01 Signals</span><strong>Fragmented systems</strong><p>Demand, pricing, revenue, inventory, spend, and policy signals enter one execution field.</p></div>
+              <div class="hero-engine-connector" aria-hidden="true"></div>
+              <div class="hero-engine-core"><span>02 Brain</span><strong>Context Engineering + Enterprise-Specific SLM</strong><p>Providio maps minimum viable context, learns the enterprise playbook, and resolves competing KPIs.</p></div>
+              <div class="hero-engine-connector" aria-hidden="true"></div>
+              <div class="hero-engine-card"><span>03 Arms</span><strong>Action Agents</strong><p>Specialized agents orchestrate the work across commercial functions.</p></div>
+              <div class="hero-engine-connector" aria-hidden="true"></div>
+              <div class="hero-engine-action"><span>04 Output</span><strong>Executed decision</strong><p>A governed action is written directly into the right source system.</p></div>
             </div>
+            <div class="hero-architecture-bottom"><span>We provide the runtime.</span><span>You own the intelligence.</span></div>
           </div>
         </div>
       </section>
@@ -3783,16 +4125,16 @@
         <div class="pain-layout">
           <div>
             <p class="kicker">The execution ceiling</p>
-            <h2>Your operators are trapped in the middle.</h2>
-            <p class="copy">Revenue, pricing, marketing, and finance teams move with different tools, different KPIs, and different versions of the truth. Operators become the manual integration layer.</p>
-            <p class="copy">Providio deploys the architecture to break it.</p>
+            <h2>Break the execution ceiling.</h2>
+            <p class="copy">Enterprises lose velocity to the coordination tax. Revenue, pricing, marketing, and finance teams optimize locally while operators stitch together spreadsheets, emails, meetings, and competing KPIs.</p>
+            <p class="copy">Providio breaks the ceiling by turning fragmented context into coordinated work.</p>
           </div>
-          <div class="pain-stack reveal d2" aria-label="Execution ceiling symptoms">
-            <div><span>01</span><strong>Manual synthesis</strong></div>
-            <div><span>02</span><strong>Conflicting KPIs</strong></div>
-            <div><span>03</span><strong>Delayed consensus</strong></div>
-            <div><span>04</span><strong>Local optimization</strong></div>
-            <div><span>05</span><strong>Trapped value</strong></div>
+          <div class="value-grid reveal d2" aria-label="Execution ceiling value impact">
+            <div class="value-card"><span>01</span><strong>Manual consensus slows action</strong><p>Every decision waits for people to reconcile the same reality.</p></div>
+            <div class="value-card"><span>02</span><strong>Local KPIs fight global outcomes</strong><p>Each team optimizes its slice while enterprise value leaks.</p></div>
+            <div class="value-card"><span>03</span><strong>Operators become human APIs</strong><p>Your best talent spends hours moving context between systems.</p></div>
+            <div class="value-card"><span>04</span><strong>Market windows expire</strong><p>Perishable demand does not wait for cross-functional alignment.</p></div>
+            <div class="value-card"><span>05</span><strong>Value stays trapped</strong><p>The business owns the data and talent, but lacks the architecture to execute.</p></div>
           </div>
         </div>
       </section>
@@ -3802,17 +4144,15 @@
           <div class="wide-intro reveal">
             <div>
               <p class="kicker">Architecture of Action</p>
-              <h2>The Engine behind execution.</h2>
+              <h2>The Brain and the Arms.</h2>
             </div>
-            <p class="copy">Providio pairs an Enterprise Context Model with enterprise-specific Small Language Models. The context model anchors AI in proprietary revenue logic. The SLM reasons through domain scenarios. Action Agents execute the work within Trust Architecture.</p>
+            <p class="copy">Providio uses Context Engineering to encode the minimum viable business context. The Enterprise-Specific SLM reasons through tradeoffs. Action Agents execute the work. Trust Architecture keeps every step governed, traceable, and auditable.</p>
           </div>
-          <div class="machine-layer reveal d2" aria-label="Providio Architecture of Action stack">
-            <div class="machine-card"><span>01</span><strong>Context Model</strong><p>Maps proprietary data, ontologies, relationships, taxonomy, and revenue logic.</p></div>
-            <div class="machine-card"><span>02</span><strong>Minimum viable data</strong><p>Engineers only the context required to bind outcomes and execute decisions.</p></div>
-            <div class="machine-card core"><span>03</span><strong>Enterprise SLM</strong><p>Compact domain models reason through enterprise-specific scenarios with lower latency.</p></div>
-            <div class="machine-card"><span>04</span><strong>Action Agents</strong><p>Traverse the context graph to orchestrate work across revenue and spend.</p></div>
-            <div class="machine-card"><span>05</span><strong>Trust Architecture</strong><p>Policy, permissions, HITL exceptions, and audit logs keep execution verifiable.</p></div>
-            <div class="machine-card"><span>06</span><strong>Decision data</strong><p>Executed decisions create new data that sharpens the next action.</p></div>
+          <div class="architecture-stack-v15 reveal d2" aria-label="Providio four part technical stack">
+            <div class="machine-card"><span>01 Context</span><strong>Context Engineering</strong><p>Maps only the business rules, constraints, and operational context required to execute high-value decisions.</p></div>
+            <div class="machine-card core"><span>02 Brain</span><strong>Enterprise-Specific SLM</strong><p>A secure reasoning engine resolves cross-functional tradeoffs through your unique enterprise scenarios.</p></div>
+            <div class="machine-card"><span>03 Arms</span><strong>Action Agents</strong><p>Specialized agents execute coordinated work across revenue, marketing spend, and source systems.</p></div>
+            <div class="machine-card"><span>04 Brakes</span><strong>Trust Architecture</strong><p>HITL exceptions, policy guardrails, permissions, and audit trails bind every automated action.</p></div>
           </div>
         </div>
       </section>
@@ -3821,119 +4161,99 @@
         <div class="wide-intro reveal">
           <div>
             <p class="kicker">Product tracks</p>
-            <h2>Two products. One brain.</h2>
+            <h2>One engine. Two commercial wedges.</h2>
           </div>
-          <p class="copy">Revenue Optimization and Marketing Spend Optimization create standalone value. Together, they resolve cross-functional tradeoffs through one shared reasoning layer.</p>
+          <p class="copy">Revenue Optimization and Marketing Spend Optimization create standalone value. Together, they show how one Architecture of Action captures value across the commercial lifecycle.</p>
         </div>
-        <div class="product-tracks reveal d2" aria-label="Two Providio product tracks">
-          <div class="track-card">
+        <div id="flows" class="product-wedge-grid reveal d2" aria-label="Providio product wedges">
+          <div class="wedge-card">
             <div>
               <span>Product 01</span>
               <h3>Revenue Optimization</h3>
-              <p class="copy">Execute revenue-driving decisions before the opportunity expires.</p>
+              <p>Execute revenue-driving decisions before the opportunity expires.</p>
             </div>
-            <div class="track-list">
-              <div>Unifies demand, fares, inventory, and policy</div>
-              <div>Reasons through airline-specific tradeoffs</div>
-              <div>Writes verifiable actions into revenue systems</div>
+            <div class="wedge-flow" aria-label="Revenue Optimization flow">
+              <div class="wedge-step"><span>Signal</span><strong>Demand shifts</strong></div>
+              <div class="wedge-connector" aria-hidden="true"></div>
+              <div class="wedge-step"><span>Reason</span><strong>Tradeoff resolved</strong></div>
+              <div class="wedge-connector" aria-hidden="true"></div>
+              <div class="wedge-step"><span>Execute</span><strong>Revenue action written</strong></div>
             </div>
+            <a class="text-link" href="#contact">Explore Revenue Optimization</a>
           </div>
-          <div class="track-card dark">
+          <div class="wedge-card dark">
             <div>
               <span>Product 02</span>
               <h3>Marketing Spend Optimization</h3>
-              <p class="copy">Move budget toward demand instead of optimizing campaigns in isolation.</p>
+              <p>Move budget toward demand instead of optimizing campaigns in isolation.</p>
             </div>
-            <div class="track-list">
-              <div>Connects budget, channels, and commercial intent</div>
-              <div>Aligns campaigns to revenue opportunities</div>
-              <div>Triggers governed spend moves inside constraints</div>
+            <div class="wedge-flow" aria-label="Marketing Spend Optimization flow">
+              <div class="wedge-step"><span>Signal</span><strong>Spend misaligns</strong></div>
+              <div class="wedge-connector" aria-hidden="true"></div>
+              <div class="wedge-step"><span>Reason</span><strong>Intent matched</strong></div>
+              <div class="wedge-connector" aria-hidden="true"></div>
+              <div class="wedge-step"><span>Execute</span><strong>Budget action triggered</strong></div>
             </div>
+            <a class="text-link" href="#contact">Explore Marketing Spend Optimization</a>
           </div>
         </div>
       </section>
 
-      <section id="flows" class="gap-section">
-        <div class="section">
-          <div class="wide-intro reveal">
-            <div>
-              <p class="kicker">Product flow preview</p>
-              <h2>Watch work move.</h2>
-            </div>
-            <p class="copy">The launch flow shows how Providio turns live commercial signals into governed actions across revenue and marketing spend.</p>
-          </div>
-          <div class="product-flow-board reveal d2" aria-label="Revenue and spend signal-to-action flows">
-            <div class="product-flow-row">
-              <div class="product-flow-step"><span>Revenue</span><strong>Revenue signal</strong></div>
-              <div class="product-flow-step"><span>Reason</span><strong>Reasoning</strong></div>
-              <div class="product-flow-step"><span>Control</span><strong>Guardrail</strong></div>
-              <div class="product-flow-step"><span>Execute</span><strong>Revenue action</strong></div>
-            </div>
-            <div class="shared-flow-core"><span>The Engine</span><strong>Enterprise Context Model + Enterprise-Specific SLM.</strong></div>
-            <div class="product-flow-row">
-              <div class="product-flow-step"><span>Spend</span><strong>Spend signal</strong></div>
-              <div class="product-flow-step"><span>Reason</span><strong>Reasoning</strong></div>
-              <div class="product-flow-step"><span>Control</span><strong>Guardrail</strong></div>
-              <div class="product-flow-step"><span>Execute</span><strong>Budget action</strong></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="human-section">
+      <section id="operators" class="human-section">
         <div class="section wide-intro" style="padding-bottom: 0;">
           <div class="reveal">
             <p class="kicker">Operator enablement</p>
-            <h2>Manage agents, not spreadsheets.</h2>
+            <h2>From calculators to orchestrators.</h2>
           </div>
-          <p class="copy reveal d2">Operators set thresholds, approve exceptions, and review outcomes. Providio's Context Model and SLM handle the synthesis, so human judgment moves from manual calculation to command.</p>
+          <p class="copy reveal d2">Providio handles the synthesis. Operators encode strategic intent, set guardrails, approve exceptions, and command the work instead of acting as the manual integration layer.</p>
         </div>
         <div class="section" style="padding-top: min(100px, 6vw);">
-          <div class="operator-control-panel reveal d2" aria-label="Operator control layer">
-            <div><span>Operator control</span><strong>Command the work</strong></div>
-            <div><span>01</span><strong>Set thresholds</strong></div>
-            <div><span>02</span><strong>Approve exceptions</strong></div>
-            <div><span>03</span><strong>Tune guardrails</strong></div>
-            <div><span>04</span><strong>Review outcomes</strong></div>
+          <div class="benefit-grid reveal d2" aria-label="Operator benefits">
+            <div class="benefit-card"><span>01</span><strong>Trade reconciliation for strategy</strong><p>Your team returns to the judgment it was hired for.</p></div>
+            <div class="benefit-card"><span>02</span><strong>Command thresholds, not spreadsheets</strong><p>Operators define the rules of execution instead of assembling the context by hand.</p></div>
+            <div class="benefit-card"><span>03</span><strong>Approve exceptions with full context</strong><p>Human review moves to the moments where judgment matters most.</p></div>
+            <div class="benefit-card"><span>04</span><strong>Scale judgment without headcount</strong><p>The same team reaches more decisions because the architecture does the work.</p></div>
           </div>
         </div>
       </section>
 
       <section id="trust" class="trust-section">
-        <div class="trust-layout">
+        <div class="trust-layout v15">
           <div class="reveal">
             <p class="kicker">Trust architecture</p>
-            <h2>Control is built in.</h2>
-            <p class="lead">No black box execution.</p>
-            <p class="copy">Providio executes within pricing boundaries, budget limits, role permissions, and policy constraints. Every decision is logged, traceable, and auditable.</p>
+            <h2>No black box execution.</h2>
+            <p class="lead">Trust is how autonomy earns its right to run.</p>
+            <p class="copy">Providio operationalizes AI transparency. Every action runs within pricing boundaries, budget limits, role permissions, and policy constraints, then becomes a traceable decision artifact.</p>
             <div class="trust-claim">
               <strong>We never train models on your data.</strong>
               <p>Providio provides the secure runtime. You own the intelligence.</p>
             </div>
           </div>
-          <div class="trust-card-loop reveal d2" aria-label="Animated decision trace cards">
-            <div class="trust-card"><div class="trust-card-top"><span>08:14</span><span>Signal</span></div><div><strong>Signal detected</strong><p>Demand moved before the reporting cycle caught it.</p></div><div class="trust-card-bottom"><span>Trigger recorded</span><span>Live context</span></div></div>
-            <div class="trust-card"><div class="trust-card-top"><span>08:15</span><span>Context</span></div><div><strong>Scenario matched</strong><p>A similar decision pattern was found in context.</p></div><div class="trust-card-bottom"><span>Pattern matched</span><span>Decision logic</span></div></div>
-            <div class="trust-card"><div class="trust-card-top"><span>08:16</span><span>Control</span></div><div><strong>Guardrails checked</strong><p>Pricing, finance, and policy constraints passed.</p></div><div class="trust-card-bottom"><span>Rules checked</span><span>Safe to route</span></div></div>
-            <div class="trust-card"><div class="trust-card-top"><span>08:17</span><span>Approval</span></div><div><strong>Approval routed</strong><p>The action moved through the required human path.</p></div><div class="trust-card-bottom"><span>Owner assigned</span><span>HITL path</span></div></div>
-            <div class="trust-card"><div class="trust-card-top"><span>08:18</span><span>Action</span></div><div><strong>Action executed</strong><p>The governed recommendation was written to the right system.</p></div><div class="trust-card-bottom"><span>Write permitted</span><span>System updated</span></div></div>
-            <div class="trust-card"><div class="trust-card-top"><span>08:21</span><span>Outcome</span></div><div><strong>Outcome captured</strong><p>The result now strengthens the next decision.</p></div><div class="trust-card-bottom"><span>Result measured</span><span>Loop learning</span></div></div>
-            <div class="trust-card verified"><div class="trust-card-top"><span>08:22</span><span>Verified</span></div><div><strong>Decision verified</strong><p>Trigger, rule, approval, action, and result became an auditable artifact.</p></div><div class="trust-card-bottom"><span>Audit-ready</span><span>Safe to scale</span></div></div>
+          <div class="trust-principles reveal d2" aria-label="Trust principles">
+            <div><strong>Command Providio through HITL guardrails.</strong><p>Validate performance before any action moves toward autonomous execution.</p></div>
+            <div><strong>Bind execution to enterprise policy.</strong><p>Pricing, budget, role, and functional rules stay inside the operating model.</p></div>
+            <div><strong>Turn every action into evidence.</strong><p>Each trigger, rule, approval, write, and result becomes auditable.</p></div>
           </div>
+        </div>
+        <div class="trust-progression reveal d3" aria-label="Earned autonomy progression">
+          <div class="trust-stage"><span>01</span><strong>Operator-driven</strong><p>Humans initiate and validate every high-stakes move.</p></div>
+          <div class="trust-stage"><span>02</span><strong>Operator-orchestrated</strong><p>Providio executes routine work while operators command intent.</p></div>
+          <div class="trust-stage"><span>03</span><strong>Exception-handled</strong><p>Humans focus on edge cases, policy breaks, and strategic changes.</p></div>
+          <div class="trust-stage earned"><span>04</span><strong>Autonomous within guardrails</strong><p>The architecture earns autonomy through verified, auditable success.</p></div>
         </div>
       </section>
 
-      <section id="investors" class="advisors-section">
+      <section id="lifecycle" class="advisors-section v15">
         <div class="section advisor-grid">
           <div class="reveal">
-            <p class="kicker">Investor / strategy view</p>
-            <h2>A wedge into commercial execution.</h2>
-            <p class="copy">Providio starts with airlines and expands across margin-critical industries where demand, inventory, pricing, and spend decisions move faster than consensus.</p>
+            <p class="kicker">Commercial lifecycle</p>
+            <h2>A wedge into continuous execution.</h2>
+            <p class="copy">Providio starts with commercial airlines and expands across margin-critical industries where perishable inventory, demand elasticity, and cross-functional friction make execution speed decisive.</p>
           </div>
-          <div class="advisor-cards reveal d2" aria-label="Investor strategy pillars">
-            <div class="advisor-card"><span>Category</span><strong>Beyond copilots</strong><p class="copy">Copilots advise individual users. Providio executes coordinated decisions across functions.</p></div>
-            <div class="advisor-card"><span>Moat</span><strong>The Engine</strong><p class="copy">Enterprise Context Models and enterprise-specific SLMs create the defensible layer.</p></div>
-            <div class="advisor-card"><span>Expansion</span><strong>Commercial lifecycle</strong><p class="copy">Revenue and marketing spend are the first product tracks in a broader Architecture of Action.</p></div>
+          <div class="lifecycle-grid reveal d2" aria-label="Commercial lifecycle pillars">
+            <div class="lifecycle-card"><span>Category</span><strong>Beyond copilots</strong><p>Copilots advise individual users. Providio executes coordinated work across functions.</p></div>
+            <div class="lifecycle-card"><span>Moat</span><strong>Enterprise-specific brain</strong><p>Context Engineering and the Enterprise-Specific SLM encode the playbook that makes each business unique.</p></div>
+            <div class="lifecycle-card"><span>Expansion</span><strong>Commercial lifecycle</strong><p>Revenue and marketing spend are the first wedges in a broader Architecture of Action.</p></div>
           </div>
         </div>
       </section>
@@ -3942,16 +4262,16 @@
         <div class="footer-shell">
           <div class="footer-cta reveal">
             <div>
-              <p class="kicker">Private capability preview</p>
-              <h2>See Providio execute.</h2>
+              <p class="kicker">Design partner conversations open</p>
+              <h2>Map one decision. Execute the proof.</h2>
             </div>
             <div>
-              <p class="copy">Request a private walkthrough of the product flow, Architecture of Action, and guardrail trace.</p>
+              <p class="copy">Use your work email to request a private walkthrough of how Providio maps one high-value decision, binds it to guardrails, and writes the action into your systems.</p>
               <form class="access-form">
                 <label for="work-email">Work email</label>
                 <div class="access-row">
                   <input id="work-email" type="email" placeholder="name@company.com" aria-label="Work email" />
-                  <button type="button">See Providio in Action</button>
+                  <button type="button">Request walkthrough</button>
                 </div>
               </form>
             </div>
@@ -3963,13 +4283,13 @@
               <h3>Sections</h3>
               <a href="#architecture">Architecture</a>
               <a href="#products">Products</a>
-              <a href="#flows">Product flows</a>
+              <a href="#operators">Operators</a>
               <a href="#trust">Trust</a>
-              <a href="#investors">Investors</a>
+              <a href="#lifecycle">Expansion</a>
             </div>
             <div class="newsletter">
               <h3>Contact</h3>
-              <p class="copy">For launch coordination, advisor updates, and private walkthrough access.</p>
+              <p class="copy">For launch coordination, design partner conversations, and private walkthrough access.</p>
               <a class="btn secondary" href="mailto:hello@providio.ai"><span>hello@providio.ai</span><span class="arrow">&rarr;</span></a>
               <div class="socials" aria-label="Social links">
                 <a href="#" aria-label="X profile">X</a>
@@ -3980,7 +4300,7 @@
 
           <div class="footer-bottom">
             <span>Providio AI</span>
-            <span>Wireframe v14. Hero video thumbnail and labeled architecture flow.</span>
+            <span>Wireframe v15. Architecture of Action communication update.</span>
           </div>
         </div>
       </section>
